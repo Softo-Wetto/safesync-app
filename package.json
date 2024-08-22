@@ -1,0 +1,11 @@
+{
+  "name": "your-project-name",
+  "version": "1.0.0",
+  "scripts": {
+    "frontend": "npm start --prefix frontend",
+    "start": "npm run frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
