@@ -1,0 +1,45 @@
+/* src/components/Header.css */
+
+/* Adjust the background gradient for a modern look */
+.navbar-dark.bg-dark {
+    background: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Customize the brand */
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+/* Style the nav links */
+.nav-link {
+    color: #f8f9fa !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    margin: 0 5px; /* Adds horizontal spacing between nav links */
+}
+
+.nav-link:hover {
+    color: #ddd !important;
+}
+
+/* Active link styling */
+.nav-link.active {
+    color: #ff6f61 !important;
+}
+
+/* Center the main navigation links */
+.main-nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Ensure the login and registration links are at the end */
+.auth-nav {
+    margin-left: auto;
+    display: flex;
+}

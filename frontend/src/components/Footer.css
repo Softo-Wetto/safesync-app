@@ -1,0 +1,63 @@
+/* src/components/Footer.css */
+
+.footer {
+    background-color: #1f1f1f;
+    color: #ffffff;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-top: 4px solid #928dab;
+}
+
+.footer h5 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.footer p {
+    margin-bottom: 0.5rem;
+}
+
+.footer a {
+    color: #ffffff; /* Ensure the link color is white */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #ff6f61; /* Hover color for links */
+}
+
+.footer .fab {
+    font-size: 1.5rem; /* Ensure the icon size is large enough to be visible */
+    transition: color 0.3s ease;
+    display: inline-block; /* Ensure the icons are displayed inline */
+    margin-right: 15px; /* Add margin to separate icons */
+}
+
+.footer .fab:hover {
+    color: #ff6f61; /* Hover color for icons */
+}
+
+.footer .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.footer .text-center {
+    text-align: center;
+}
+
+.footer i {
+    margin-right: 8px;
+}
+
+@media (min-width: 768px) {
+    .footer .text-md-left {
+        text-align: left;
+    }
+
+    .footer .text-md-right {
+        text-align: right;
+    }
+}

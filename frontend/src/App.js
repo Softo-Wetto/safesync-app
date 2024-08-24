@@ -4,26 +4,22 @@ import './assets/styles/styles.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 
+
+import Header from './components/Header';
+import Footer from './components/Footer';
+import './App.css';
+
 function App() {
     return (
         <Router>
-            <header className="header">
-                <h1 className="header-title">Safesync</h1>
-                <nav className="nav">
-                    <a href="/">Home</a>
-                    <a href="/about">About</a>
-                    <a href="/services">Services</a>
-                    <a href="/contact">Contact</a>
-                </nav>
-            </header>
-            <div className="container">
+            <Header />
+            <div className="container my-4">
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    {/* Add more routes here if needed */}
                 </Routes>
             </div>
-            <footer className="footer">
-                <p>&copy; 2024 My Website</p>
-            </footer>
+            <Footer />
         </Router>
     );
 }
