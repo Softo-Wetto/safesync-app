@@ -1,9 +1,11 @@
 {
-  "name": "your-project-name",
+  "name": "safesync-app",
   "version": "1.0.0",
   "scripts": {
     "frontend": "npm start --prefix frontend",
-    "start": "npm run frontend"
+    "backend": "npm start --prefix backend", 
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\"", 
+    "start": "concurrently \"npm run frontend\" \"npm run backend\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
