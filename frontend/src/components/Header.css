@@ -19,26 +19,23 @@
     color: #f8f9fa !important;
     font-weight: 500;
     transition: color 0.3s ease;
-    margin: 0 5px; /* Adds horizontal spacing between nav links */
+    margin: 0 5px; 
 }
 
 .nav-link:hover {
     color: #ddd !important;
 }
 
-/* Active link styling */
 .nav-link.active {
     color: #ff6f61 !important;
 }
 
-/* Center the main navigation links */
 .main-nav {
     flex-grow: 1;
     display: flex;
     justify-content: center;
 }
 
-/* Ensure the login and registration links are at the end */
 .auth-nav {
     margin-left: auto;
     display: flex;

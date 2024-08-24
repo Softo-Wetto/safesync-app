@@ -107,8 +107,8 @@
 }
 
 .about {
-    background-color: #343a40; /* Dark background for consistency */
-    color: #000000; /* Light text for readability */
+    background-color: #343a40; 
+    color: #000000; 
     padding: 3rem 0;
     border-top: 4px solid #928dab;
 }
@@ -128,7 +128,7 @@
 }
 
 .contact {
-    background-color: #495057; /* Slightly different dark tone for contrast */
+    background-color: #495057; 
     color: #f8f9fa;
     padding: 3rem 0;
     border-top: 4px solid #928dab;
@@ -155,7 +155,7 @@
 }
 
 .contact .btn:hover {
-    background-color: #ff6f61; /* Match hover color to theme */
+    background-color: #ff6f61; 
     transform: translateY(-3px);
 }
 
