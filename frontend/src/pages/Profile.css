@@ -1,0 +1,72 @@
+.profile-page {
+    padding: 20px;
+    background-color: rgb(177, 238, 238);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; /* Ensures the background covers the entire viewport height */
+}
+
+.container-fluid {
+    background-color: white; /* Sets the container background to white */
+    border-radius: 12px; /* Gives the container rounded corners */
+    padding: 20px; /* Adds padding inside the container */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+    animation: fadeIn 0.6s ease-out; /* Apply fade-in animation */
+    opacity: 0;
+    animation-fill-mode: forwards; /* Ensures the container stays in the final state */
+}
+
+.profile-page .card {
+    background-color: rgba(255, 255, 255, 1); /* Sets the card background to pure white */
+    border-radius: 12px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 3px solid #007bff;
+    margin-bottom: 20px; /* Add space below the picture */  
+}
+
+.profile-field {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.profile-field strong {
+    color: #007bff;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Start slightly below */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End in the original position */
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .profile-page {
+        padding: 10px;
+    }
+
+    .container-fluid {
+        padding: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Slightly lighter shadow for mobile */
+    }
+
+    .profile-picture {
+        width: 100px;
+        height: 100px; /* Smaller picture on mobile */
+    }
+
+    .profile-field {
+        font-size: 1em; /* Slightly smaller text for better readability on mobile */
+    }
+}

@@ -1,48 +1,136 @@
+/* Container Styling */
 .login-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    max-width: 450px; /* Slightly increased width for better spacing */
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #ffffff; /* Pure white background for consistency */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Deeper shadow for a floating effect */
+    border-radius: 12px; /* Softer rounded corners */
+    border: 1px solid #e0e0e0; /* Light border for added depth */
+    animation: fadeIn 0.8s ease-in-out; /* Animation for smooth entrance */
 }
 
+/* Heading Styling */
 .login-container h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    font-size: 1.8rem; /* Consistent font size with registration */
+    color: #343a40; /* Darker color for contrast */
+    font-weight: bold;
+    letter-spacing: 1px; /* Slight letter spacing for a modern look */
+    animation: slideDown 0.8s ease-in-out; /* Slide down effect for heading */
 }
 
+/* Form Group Styling */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.8s ease-in-out; /* Fade in up animation */
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    margin-bottom: 8px;
+    font-weight: 600; /* Slightly bolder font */
+    color: #495057; /* Medium grey for a softer contrast */
 }
 
 .form-group input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ced4da;
-    border-radius: 4px;
+    border-radius: 6px; /* Slightly more rounded for a modern feel */
+    font-size: 1rem;
+    color: #495057;
+    background-color: #f8f9fa;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+/* Input Focus Styling */
+.form-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle blue shadow on focus */
+    outline: none;
+}
+
+/* Error Message Styling */
 .error {
-    color: red;
-    margin-bottom: 15px;
+    color: #e74c3c; /* Consistent red color for errors */
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-align: center; /* Centered error messages */
 }
 
+/* Button Styling */
 .login-container .btn {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px; /* Slightly more rounded for consistency */
     cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: fadeIn 0.8s ease-in-out; /* Button fade in animation */
 }
+
+/* Button Hover Effect */
 .login-container .btn:hover {
     background-color: #0056b3;
+    transform: translateY(-2px); /* Slight lift on hover for interactivity */
+}
+
+/* Keyframes for Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    .login-container {
+        padding: 20px;
+        margin: 40px auto;
+    }
+
+    .login-container h2 {
+        font-size: 1.5rem; /* Adjusted for smaller screens */
+    }
+
+    .form-group input {
+        padding: 10px;
+    }
+
+    .login-container .btn {
+        padding: 10px;
+    }
 }

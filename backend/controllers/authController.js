@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 // Register a new user
 exports.register = async (req, res) => {
-    const { username, email, password } = req.body;
+    const { fullName, username, email, dateOfBirth, address, phoneNumber, password } = req.body;
 
     try {
         // Check if user already exists
@@ -13,7 +13,17 @@ exports.register = async (req, res) => {
             return res.status(400).json({ error: 'User with this email already exists' });
         }
 
-        const user = await User.create({ username, email, password });
+        // Create a new user
+        const user = await User.create({
+            fullName,
+            username,
+            email,
+            dateOfBirth,
+            address,
+            phoneNumber,
+            password
+        });
+
         res.status(201).json({ message: 'User registered successfully', user });
     } catch (err) {
         console.error('Database error during registration:', err);

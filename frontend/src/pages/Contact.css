@@ -1,0 +1,60 @@
+/* Contact Page Styling */
+.contact-hero-section {
+    background: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%);
+    color: #ffffff;
+    padding: 100px 0;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.contact-hero-section h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    animation: fadeInDown 2s ease-in-out;
+}
+
+.contact-hero-section p {
+    font-size: 1.2rem;
+    animation: fadeInDown 2s ease-in-out;
+}
+
+.contact-form-section {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.contact-form-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-align: center;
+    animation: fadeInDown 2s ease-in-out;
+}
+
+.contact-info-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.contact-info-section h4 {
+    font-size: 1.5rem;
+    margin-top: 15px;
+    font-weight: bold;
+    animation: fadeInDown 2s ease-in-out;
+}
+
+.contact-info-section p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-top: 10px;
+}
+
+.contact-info-section i {
+    color: #1f1c2c;
+    margin-bottom: 15px;
+}
+
+.map-section {
+    margin-top: 60px;
+}

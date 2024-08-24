@@ -1,49 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaUsers, FaDollarSign, FaProjectDiagram, FaCalendarAlt, FaChartLine } from 'react-icons/fa';
-import './Sidebar.css'; // Import the new CSS file for styling
+import { FaHome, FaUsers, FaDollarSign, FaProjectDiagram, FaCalendarAlt, FaChartLine, FaBars } from 'react-icons/fa';
+import './Sidebar.css'; // Import the CSS file for styling
 
 const Sidebar = () => {
+    const [isCollapsed, setIsCollapsed] = useState(false);
+
+    const toggleSidebar = () => {
+        setIsCollapsed(!isCollapsed);
+    };
+
     return (
-        <div className="sidebar">
+        <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
             <div className="sidebar-header">
-                <h2>Dashboard</h2>
+                <button className="collapse-btn" onClick={toggleSidebar}>
+                    <FaBars />
+                </button>
+                {!isCollapsed && <h2>Dashboard</h2>}
             </div>
             <ul className="sidebar-nav">
                 <li className="sidebar-nav-item">
-                    <Link className="sidebar-nav-link" to="#">
-                        <FaHome className="sidebar-icon" /> 
-                        <span>Overview</span>
+                    <Link className="sidebar-nav-link" to="/dashboard">
+                        <FaHome className="sidebar-icon" />
+                        {!isCollapsed && <span>Overview</span>}
                     </Link>
                 </li>
                 <li className="sidebar-nav-item">
                     <Link className="sidebar-nav-link" to="#">
-                        <FaUsers className="sidebar-icon" /> 
-                        <span>Users</span>
+                        <FaUsers className="sidebar-icon" />
+                        {!isCollapsed && <span>Users</span>}
                     </Link>
                 </li>
                 <li className="sidebar-nav-item">
                     <Link className="sidebar-nav-link" to="#">
-                        <FaDollarSign className="sidebar-icon" /> 
-                        <span>Revenue</span>
+                        <FaDollarSign className="sidebar-icon" />
+                        {!isCollapsed && <span>Revenue</span>}
                     </Link>
                 </li>
                 <li className="sidebar-nav-item">
                     <Link className="sidebar-nav-link" to="#">
-                        <FaProjectDiagram className="sidebar-icon" /> 
-                        <span>Projects</span>
+                        <FaProjectDiagram className="sidebar-icon" />
+                        {!isCollapsed && <span>Projects</span>}
                     </Link>
                 </li>
                 <li className="sidebar-nav-item">
                     <Link className="sidebar-nav-link" to="#">
-                        <FaCalendarAlt className="sidebar-icon" /> 
-                        <span>Events</span>
+                        <FaCalendarAlt className="sidebar-icon" />
+                        {!isCollapsed && <span>Events</span>}
                     </Link>
                 </li>
                 <li className="sidebar-nav-item">
                     <Link className="sidebar-nav-link" to="#">
-                        <FaChartLine className="sidebar-icon" /> 
-                        <span>Metrics</span>
+                        <FaChartLine className="sidebar-icon" />
+                        {!isCollapsed && <span>Metrics</span>}
                     </Link>
                 </li>
             </ul>

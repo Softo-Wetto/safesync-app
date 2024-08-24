@@ -66,6 +66,11 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     <li>
+                                        <Link className="dropdown-item" to="/profile">
+                                            Profile
+                                        </Link>
+                                    </li>
+                                    <li>
                                         <button className="dropdown-item" onClick={handleLogout}>
                                             Logout
                                         </button>

@@ -4,8 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import './Register.css';
 
 const Register = () => {
+    const [fullName, setFullName] = useState('');
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState(''); // New email state
+    const [email, setEmail] = useState('');
+    const [dateOfBirth, setDateOfBirth] = useState('');
+    const [address, setAddress] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
@@ -21,8 +25,12 @@ const Register = () => {
 
         try {
             await axios.post('http://localhost:5000/api/auth/register', {
+                fullName,
                 username,
                 email,
+                dateOfBirth,
+                address,
+                phoneNumber,
                 password
             });
             navigate('/login'); // Redirect to login page after successful registration
@@ -41,6 +49,16 @@ const Register = () => {
             <h2>Register</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
+                    <label htmlFor="fullName">Full Name</label>
+                    <input
+                        type="text"
+                        id="fullName"
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
                     <label htmlFor="username">Username</label>
                     <input
                         type="text"
@@ -57,6 +75,36 @@ const Register = () => {
                         id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="dateOfBirth">Date of Birth</label>
+                    <input
+                        type="date"
+                        id="dateOfBirth"
+                        value={dateOfBirth}
+                        onChange={(e) => setDateOfBirth(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="address">Address</label>
+                    <input
+                        type="text"
+                        id="address"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="phoneNumber">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="phoneNumber"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
                         required
                     />
                 </div>

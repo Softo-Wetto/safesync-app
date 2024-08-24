@@ -5,7 +5,7 @@ import Sidebar from '../components/Sidebar';
 
 const Dashboard = () => {
     return (
-        <div className="d-flex">
+        <div className="dashboard-container">
            <Sidebar />
             {/* Main Content */}
             <div className="container-fluid p-4">
@@ -34,7 +34,7 @@ const Dashboard = () => {
                             </div>
                             <div className="card-body">
                                 <h5 className="card-title">$45,234</h5>
-                                <p className="card-text">Total revenue generated this month.</p>
+                                <p className="card-text">Total revenue generated this month. Check down below.</p>
                             </div>
                             <div className="card-footer">
                                 <button className="btn btn-light">View Details</button>
@@ -49,7 +49,7 @@ const Dashboard = () => {
                             </div>
                             <div className="card-body">
                                 <h5 className="card-title">12</h5>
-                                <p className="card-text">Number of projects currently active.</p>
+                                <p className="card-text">Number of projects currently active. See more below.</p>
                             </div>
                             <div className="card-footer">
                                 <button className="btn btn-light">View Details</button>

@@ -24,13 +24,16 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger shadow for better visibility */
     margin-bottom: 1rem;
     letter-spacing: 1.2px; /* Slightly increased letter spacing */
+    animation: fadeInDown 2s ease-in-out;
 }
 
 .gif-banner-text {
     font-size: 1.8rem; /* Larger text size */
     margin-top: 1rem;
+    font-weight: italic; 
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5); /* Subtle but effective shadow */
     margin-bottom: 2rem;
+    animation: fadeInDown 3s ease-in-out;
 }
 
 .gif-banner button {
@@ -43,6 +46,7 @@
     border: none;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Button shadow */
     transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: fadeInDown 4s ease-in-out;
 }
 
 .gif-banner button:hover {
@@ -70,7 +74,6 @@
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    animation: fadeInDown 1s ease-in-out;
 }
 
 .welcome-section .btn {
@@ -78,6 +81,7 @@
     font-size: 1.25rem;
     border-radius: 50px; /* Rounded button for a modern look */
     transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: fadeInDown 1s ease-in-out;
 }
 
 .welcome-section .btn:hover {
@@ -165,6 +169,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInDown 1s ease-in-out;
 }
 
 .services .card:hover {
@@ -222,6 +227,7 @@
     letter-spacing: 1.2px; /* Slightly increased letter spacing */
     text-transform: uppercase;
     color: #f8f9fa; /* Light text color for better contrast */
+    animation: fadeInDown 1s ease-in-out;
 }
 
 .about p {
@@ -257,6 +263,7 @@
     letter-spacing: 1.2px;
     text-transform: uppercase;
     color: #f8f9fa;
+    animation: fadeInDown 1s ease-in-out;
 }
 
 .contact p {
@@ -265,6 +272,7 @@
     max-width: 600px;
     margin: 0 auto;
     color: #cfd4da;
+    animation: fadeInDown 1s ease-in-out;
 }
 
 .contact .btn {
@@ -276,6 +284,7 @@
     color: #ffffff;
     border: none;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slightly more pronounced shadow */
+    animation: fadeInDown 1s ease-in-out;
 }
 
 .contact .btn:hover {
