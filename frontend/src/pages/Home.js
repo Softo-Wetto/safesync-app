@@ -4,6 +4,15 @@ import './Home.css';
 const Home = () => {
     return (
         <div className="home">
+            {/* GIF Banner Section */}
+            <section className="gif-banner">
+                <div className="gif-banner-overlay">
+                    <h1 className="gif-banner-title">Welcome to Safesync</h1>
+                    <p className="gif-banner-text">Your Safety, Our Priority</p>
+                    <button className="btn btn-light btn-lg mt-3">Learn More</button>
+                </div>
+            </section>
+
             {/* Welcome Section */}
             <section className="welcome-section text-center py-5">
                 <div className="container">
@@ -52,7 +61,7 @@ const Home = () => {
                                 <img src="https://s7d9.scene7.com/is/image/minesafetyappliances/2023-category-card-face-protection?scl=1" className="card-img-top" alt="Service 3" />
                                 <div className="card-body">
                                     <h5 className="card-title">Service 3</h5>
-                                    <p className="card-text">Experience the excellence of service 3 today. We can get you booked.</p>
+                                    <p className="card-text">Experience the excellence of service 3 today.</p>
                                 </div>
                             </div>
                         </div>

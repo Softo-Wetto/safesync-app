@@ -1,5 +1,55 @@
 /* src/pages/Home.css */
 
+/* GIF Banner Styling */
+.gif-banner {
+    position: relative;
+    height: 100vh; /* Full viewport height */
+    width: 100%;
+    background-image: url('https://cdn.dribbble.com/users/448601/screenshots/2169052/crane_dribbble.gif'); /* Replace with your GIF URL */
+    background-size: cover; /* Ensure the GIF covers the entire area */
+    background-position: center; /* Center the GIF */
+    background-repeat: no-repeat; /* Prevent the GIF from repeating */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #000000; /* White text for contrast */
+    padding: 0 20px; /* Add some padding for better layout on smaller screens */
+}
+
+.gif-banner-title {
+    font-size: 4rem; /* Larger font size to stand out */
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger shadow for better visibility */
+    margin-bottom: 1rem;
+    letter-spacing: 1.2px; /* Slightly increased letter spacing */
+}
+
+.gif-banner-text {
+    font-size: 1.8rem; /* Larger text size */
+    margin-top: 1rem;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5); /* Subtle but effective shadow */
+    margin-bottom: 2rem;
+}
+
+.gif-banner button {
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
+    font-size: 1.5rem; /* Larger button text */
+    border-radius: 50px;
+    background-color: #007bff; /* Button color */
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Button shadow */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.gif-banner button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
 .welcome-section {
     background-color: #f8f9fa;
     padding: 60px 0;
@@ -11,6 +61,7 @@
     font-size: 2.5rem; 
     font-weight: bold;
     margin-bottom: 1rem;
+    animation: fadeInDown 1s ease-in-out;
 }
 
 .welcome-text {
@@ -19,6 +70,7 @@
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    animation: fadeInDown 1s ease-in-out;
 }
 
 .welcome-section .btn {
@@ -37,13 +89,16 @@
 .hero {
     position: relative;
     background-color: #343a40; 
-    color: #f8f9fa; 
+    color: #ffffff; 
     background-image: url('https://www.doka.com/revolution/webapp/cache/assets/c0ce89127b546c07a2666788a34a707c/insights-working-world-1920x600-.jpg');
     background-size: cover;
     background-position: center;
-    padding: 4rem 0;
+    padding: 4rem 2rem; /* Adjusted padding for better fit */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+    border-radius: 30px; /* Increased border-radius for more rounded corners */
+    overflow: hidden; /* Ensures content stays within the rounded corners */
 }
+
 
 .hero::before {
     content: "";
@@ -66,6 +121,7 @@
     font-weight: bold;
     margin-bottom: 1rem;
     letter-spacing: 1px;
+    color: #ffffff;
     animation: fadeInDown 1s ease-in-out;
 }
 
@@ -96,8 +152,10 @@
 }
 
 .services {
-    background-color: #f8f9fa; 
-    padding: 3rem 0;
+    background-color: #e6e9ed; 
+    padding: 8rem 5rem;
+    border-radius: 30px;
+    margin: 2rem 0;
 }
 
 .services .card {
@@ -140,58 +198,92 @@
     margin-bottom: 1.5rem;
 }
 
+/* About Section */
 .about {
-    background-color: #343a40; 
-    color: #000000; 
-    padding: 3rem 0;
-    border-top: 4px solid #928dab;
+    background: linear-gradient(135deg, #2b3e50, #3e5065); /* Cooler, modern gradient */
+    color: #ffffff;
+    padding: 4rem 2rem;
+    border-top: 4px solid #6c757d;
+    border-radius: 12px; /* Slightly less rounded corners for a sharper look */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Softer, extended shadow */
+    margin: 2rem 0;
+    text-align: center;
+    transition: transform 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.about:hover {
+    transform: translateY(-10px); /* Subtle lift on hover */
 }
 
 .about h2 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     font-weight: bold;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1.2px; /* Slightly increased letter spacing */
+    text-transform: uppercase;
+    color: #f8f9fa; /* Light text color for better contrast */
 }
 
 .about p {
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1.2rem;
+    line-height: 1.8;
     max-width: 800px;
     margin: 0 auto;
     animation: fadeIn 1s ease-in-out;
+    color: #cfd4da; /* Softer gray for readability */
 }
 
+/* Contact Section */
 .contact {
-    background-color: #495057; 
+    background: linear-gradient(135deg, #3e5065, #2b3e50); /* Matching gradient for consistency */
     color: #f8f9fa;
-    padding: 3rem 0;
-    border-top: 4px solid #928dab;
+    padding: 4rem 2rem;
+    border-top: 4px solid #6c757d;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    margin: 2rem 0;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.contact:hover {
+    transform: translateY(-10px); /* Subtle lift on hover */
 }
 
 .contact h2 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     font-weight: bold;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #f8f9fa;
 }
 
 .contact p {
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1.2rem;
+    line-height: 1.8;
     max-width: 600px;
     margin: 0 auto;
+    color: #cfd4da;
 }
 
 .contact .btn {
-    padding: 0.75rem 2rem;
+    padding: 0.75rem 2.5rem;
     font-size: 1.25rem;
     border-radius: 50px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ff6f61;
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slightly more pronounced shadow */
 }
 
 .contact .btn:hover {
-    background-color: #ff6f61; 
-    transform: translateY(-3px);
+    background-color: #ff5a4d;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
 }
+
 
 @keyframes fadeIn {
     from {

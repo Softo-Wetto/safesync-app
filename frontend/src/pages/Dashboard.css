@@ -1,0 +1,109 @@
+/* Dashboard.css */
+
+/* General Container Styling */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Ensure the container takes the full height of the viewport */
+    overflow: hidden; /* Prevents any unwanted overflow */
+    background-color: #fcfeff;
+}
+
+.d-flex {
+    display: flex;
+    flex: 1; /* Ensure it takes all the available vertical space */
+}
+
+/* Main Content Styling */
+.container-fluid {
+    padding: 20px; /* Add padding around the main content */
+    padding-top: 20px; /* Adjust padding from the top */
+    overflow-y: auto; /* Allow scrolling within the main content */
+}
+
+.d-flex .h1, .h2 {
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Add some space between the cards */
+}
+
+.card {
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Stronger shadow for depth */
+    transition: transform 0.3s, box-shadow 0.3s;
+    background: #ffffff; /* White background for clean contrast */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.card-header {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.card-body h5 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.card-footer .btn {
+    background-color: #007bff;
+    color: white;
+    border-radius: 6px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.card-footer .btn:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect on buttons */
+}
+
+/* Button Customization */
+.btn-outline-light {
+    border: 1px solid #007bff;
+    color: #007bff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-light:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Recent Activity Section */
+.recent-activity .card {
+    background-color: #ffffff;
+    border-left: 4px solid #007bff;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container-fluid {
+        margin-left: 0;
+        padding: 15px;
+        padding-top: 20px; /* Adjust padding for smaller screens */
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .sidebar-nav-link {
+        justify-content: center;
+    }
+
+    .sidebar-icon {
+        margin-right: 0;
+    }
+}
