@@ -1,12 +1,9 @@
-/* src/components/Header.css */
 
-/* Adjust the background gradient for a modern look */
 .navbar-dark.bg-dark {
     background: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Customize the brand */
 .navbar-brand {
     font-size: 1.8rem;
     font-weight: bold;
@@ -14,7 +11,6 @@
     letter-spacing: 2px;
 }
 
-/* Style the nav links */
 .nav-link {
     color: #f8f9fa !important;
     font-weight: 500;

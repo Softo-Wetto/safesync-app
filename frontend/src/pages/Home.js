@@ -4,10 +4,21 @@ import './Home.css';
 const Home = () => {
     return (
         <div className="home">
+            {/* Welcome Section */}
+            <section className="welcome-section text-center py-5">
+                <div className="container">
+                    <h2 className="welcome-title">Welcome to Safesync</h2>
+                    <p className="welcome-text">
+                        We are dedicated to providing top-tier safety solutions to ensure your peace of mind. Join us in making the world a safer place.
+                    </p>
+                    <button className="btn btn-primary btn-lg mt-3">Learn More</button>
+                </div>
+            </section>
+
             {/* Hero Section */}
             <section className="hero bg-primary text-white text-center py-5">
                 <div className="container">
-                    <h1 className="hero-title display-4">Welcome to Safesync</h1>
+                    <h1 className="hero-title display-4">Your Safety, Our Priority</h1>
                     <p className="lead">Your one-stop solution for all things awesome.</p>
                     <button className="btn btn-light btn-lg mt-3">Get Started</button>
                 </div>

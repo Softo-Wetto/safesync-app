@@ -1,14 +1,48 @@
 /* src/pages/Home.css */
 
+.welcome-section {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+    color: #343a40; 
+    margin-bottom: 30px; 
+}
+
+.welcome-title {
+    font-size: 2.5rem; 
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.welcome-text {
+    font-size: 1.2rem; 
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.welcome-section .btn {
+    padding: 0.75rem 2rem;
+    font-size: 1.25rem;
+    border-radius: 50px; /* Rounded button for a modern look */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.welcome-section .btn:hover {
+    background-color: #0056b3; 
+    transform: translateY(-3px); 
+}
+
+
 .hero {
-    position: relative; /* Ensure that the overlay is positioned correctly */
-    background-color: #343a40; /* Dark background to match header and footer */
-    color: #f8f9fa; /* Light text for contrast */
+    position: relative;
+    background-color: #343a40; 
+    color: #f8f9fa; 
     background-image: url('https://www.doka.com/revolution/webapp/cache/assets/c0ce89127b546c07a2666788a34a707c/insights-working-world-1920x600-.jpg');
     background-size: cover;
     background-position: center;
     padding: 4rem 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add text shadow for better readability */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
 }
 
 .hero::before {
@@ -18,13 +52,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Dim the background image by adding a semi-transparent black overlay */
-    z-index: 1; /* Ensure the overlay stays behind the text */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1; 
 }
 
 .hero .container {
     position: relative;
-    z-index: 2; /* Ensure the text is above the overlay */
+    z-index: 2;
 }
 
 .hero-title {
@@ -62,12 +96,12 @@
 }
 
 .services {
-    background-color: #f8f9fa; /* Light background for contrast with dark cards */
+    background-color: #f8f9fa; 
     padding: 3rem 0;
 }
 
 .services .card {
-    background-color: #495057; /* Dark card background to match theme */
+    background-color: #495057;
     color: #f8f9fa;
     border: none;
     border-radius: 10px;

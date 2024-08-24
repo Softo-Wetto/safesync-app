@@ -21,7 +21,7 @@ const Footer = () => {
                     </div>
                     <div className="col-md-3">
                         <h5>Contact Us</h5>
-                        <p><i className="fas fa-map-marker-alt"></i> 123 Main Street, Anytown, USA</p>
+                        <p><i className="fas fa-map-marker-alt"></i> 123 Main Street, Anytown, AUS</p>
                         <p><i className="fas fa-phone-alt"></i> +1 (555) 123-4567</p>
                         <p><i className="fas fa-envelope"></i> support@safesync.com</p>
                     </div>
