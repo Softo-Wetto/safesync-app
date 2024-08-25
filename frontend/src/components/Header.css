@@ -84,6 +84,12 @@
     transform: rotate(90deg); /* Rotate the icon on collapse */
 }
 
+.dropdown-divider {
+    margin: 0.5rem 0; /* Adds a bit of space above and below the divider */
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* A subtle white line with reduced opacity */
+    border-color: rgba(255, 255, 255, 0.2); /* Ensures the color is consistent */
+}
+
 /* Mobile View Adjustments */
 @media (max-width: 768px) {
     .navbar-brand {

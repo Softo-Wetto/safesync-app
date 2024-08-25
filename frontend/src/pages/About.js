@@ -17,10 +17,10 @@ const AboutPage = () => {
                 <div className="container">
                     <h2>Who We Are</h2>
                     <p>
-                        At Safesync, we are dedicated to providing top-tier safety solutions to ensure your peace of mind.
-                        Our team of experts is committed to making the world a safer place by delivering innovative and reliable
-                        safety products and services. Whether you are a small business or a large corporation, we are here to
-                        support you every step of the way.
+                    Relay Consulting Services originated as a consultancy service to high risk, complex and custom orientated clients. 
+                    We have been in work health and safety for over 20 years with some 100+ years of experience across a wide range of 
+                    businesses and industries. If you are seeking help or assistance and want somebody that doesn’t apply a one size 
+                    fits all but takes the time to understand you and your business then give us a call.
                     </p>
                 </div>
             </section>
@@ -32,12 +32,12 @@ const AboutPage = () => {
                     <div className="row">
                         <div className="col-lg-4 col-md-6 team-member">
                             <img src="https://via.placeholder.com/150" alt="John Doe" />
-                            <h4>John Doe</h4>
+                            <h4>Terry Brennan</h4>
                             <p>Founder & CEO</p>
                         </div>
                         <div className="col-lg-4 col-md-6 team-member">
                             <img src="https://via.placeholder.com/150" alt="Jane Smith" />
-                            <h4>Jane Smith</h4>
+                            <h4>Ryan Alexios</h4>
                             <p>Chief Technology Officer</p>
                         </div>
                         <div className="col-lg-4 col-md-6 team-member">

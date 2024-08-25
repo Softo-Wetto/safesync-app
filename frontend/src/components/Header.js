@@ -71,6 +71,9 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     <li>
+                                        <hr className="dropdown-divider" /> {/* Divider */}
+                                    </li>
+                                    <li>
                                         <button className="dropdown-item" onClick={handleLogout}>
                                             Logout
                                         </button>

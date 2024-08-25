@@ -42,8 +42,8 @@ const Home = () => {
                             <div className="card mb-4">
                                 <img src="https://aware365.com.au/wp-content/uploads/2022/06/whs-system-compliance-expert-safety-consultant-australia.jpg" className="card-img-top" alt="Service 1" />
                                 <div className="card-body">
-                                    <h5 className="card-title">Service 1</h5>
-                                    <p className="card-text">We offer exceptional service 1 that meets your needs.</p>
+                                    <h5 className="card-title">AUDITING</h5>
+                                    <p className="card-text">WWe provide a wide range of safety audits from holistic legal and compliance audits right through to systems and customised safety audits to suit your unique needs. To find out more, get in touch.</p>
                                 </div>
                             </div>
                         </div>
@@ -51,8 +51,8 @@ const Home = () => {
                             <div className="card mb-4">
                                 <img src="https://shedblog.com.au/wp-content/uploads/2023/12/Safety-glasses.png" className="card-img-top" alt="Service 2" />
                                 <div className="card-body">
-                                    <h5 className="card-title">Service 2</h5>
-                                    <p className="card-text">Our service 2 is designed to provide the best results.</p>
+                                    <h5 className="card-title">CONSULTING</h5>
+                                    <p className="card-text">My clients are my number one priority, and my services prove just how committed I am to their success. Book an introductory meeting today to learn more about how I can make your business thrive.</p>
                                 </div>
                             </div>
                         </div>
@@ -60,8 +60,8 @@ const Home = () => {
                             <div className="card mb-4">
                                 <img src="https://s7d9.scene7.com/is/image/minesafetyappliances/2023-category-card-face-protection?scl=1" className="card-img-top" alt="Service 3" />
                                 <div className="card-body">
-                                    <h5 className="card-title">Service 3</h5>
-                                    <p className="card-text">Experience the excellence of service 3 today.</p>
+                                    <h5 className="card-title">EXPERT OPINION</h5>
+                                    <p className="card-text">We provide a wide range of safety audits from holistic legal and compliance audits right through to systems and customised safety audits to suit your unique needs. Contact us to find out how I can help today.</p>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@ const Home = () => {
                     <p>
                         Have any questions? Reach out to us anytime, and we'll be happy to assist you.
                     </p>
-                    <button className="btn btn-primary btn-lg mt-3">Contact Us</button>
+                    <a href="/contact" className="btn btn-primary btn-lg mt-3">Contact Us</a>
                 </div>
             </section>
         </div>
