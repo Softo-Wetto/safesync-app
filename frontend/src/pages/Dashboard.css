@@ -30,36 +30,60 @@
     }
 }
 
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .dashboard-container .card {
     border-radius: 12px; /* More rounded corners */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Stronger shadow for depth */
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     background: #ffffff; /* White background for clean contrast */
     animation: fadeInUp 0.6s ease-out; /* Apply fade-in-up animation */
     opacity: 0;
-    animation-fill-mode: forwards; /* Ensures the card stays in the final state *
+    animation-fill-mode: forwards; /* Ensures the card stays in the final state */
 }
 
-.card:hover {
-    transform: translateY(-5px); /* Slight lift effect on hover */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+.dashboard-container .card:hover {
+    transform: scale(1.05); /* Scale up slightly on hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
 }
 
 .card-header {
     font-size: 1.4rem;
     font-weight: 600;
+    animation: slideInLeft 0.6s ease-out; /* Slide in animation for header */
 }
 
 .card-body h5 {
     font-size: 1.8rem;
     margin-bottom: 10px;
+    animation: slideInRight 0.6s ease-out; /* Slide in animation for body */
 }
 
 .card-footer .btn {
     background-color: #007bff;
     color: white;
     border-radius: 6px;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-footer .btn:hover {
@@ -71,7 +95,7 @@
 .btn-outline-light {
     border: 1px solid #007bff;
     color: #007bff;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-outline-light:hover {
@@ -83,6 +107,7 @@
 .recent-activity .card {
     background-color: #ffffff;
     border-left: 4px solid #007bff;
+    animation: fadeInUp 0.6s ease-out; /* Fade in for recent activity cards */
 }
 
 /* Responsive Adjustments */
