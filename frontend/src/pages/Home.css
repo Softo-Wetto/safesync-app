@@ -36,12 +36,12 @@
     animation: fadeInDown 3s ease-in-out;
 }
 
-.gif-banner button {
+.gif-banner button, .gif-banner a  {
     margin-top: 2rem;
     padding: 0.75rem 2rem;
     font-size: 1.5rem; /* Larger button text */
     border-radius: 50px;
-    background-color: #007bff; /* Button color */
+    background-color: #ff0000; /* Button color */
     color: #ffffff;
     border: none;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Button shadow */
@@ -49,10 +49,9 @@
     animation: fadeInDown 4s ease-in-out;
 }
 
-.gif-banner button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    transform: translateY(-3px); /* Slight lift effect on hover */
-}
+.gif-banner button:hover, .gif-banner a:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}       
 
 .welcome-section {
     background-color: #f8f9fa;
@@ -76,7 +75,7 @@
     margin-right: auto;
 }
 
-.welcome-section .btn {
+.welcome-section .btn, .welcome-section a {
     padding: 0.75rem 2rem;
     font-size: 1.25rem;
     border-radius: 50px; /* Rounded button for a modern look */
@@ -84,8 +83,7 @@
     animation: fadeInDown 1s ease-in-out;
 }
 
-.welcome-section .btn:hover {
-    background-color: #0056b3; 
+.welcome-section .btn:hover, .welcome-section a:hover {
     transform: translateY(-3px); 
 }
 
@@ -129,7 +127,8 @@
     animation: fadeInDown 1s ease-in-out;
 }
 
-.hero .btn {
+.hero .btn, .hero a {
+    text-shadow: none;
     animation: fadeInUp 1s ease-in-out;
 }
 

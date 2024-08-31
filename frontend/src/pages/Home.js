@@ -1,5 +1,6 @@
 import React from 'react';
 import './Home.css'; 
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -9,7 +10,7 @@ const Home = () => {
                 <div className="gif-banner-overlay">
                     <h1 className="gif-banner-title">Welcome to Safesync</h1>
                     <p className="gif-banner-text">Your Safety, Our Priority</p>
-                    <button className="btn btn-light btn-lg mt-3">Learn More</button>
+                    <Link to="/about" className="btn btn-danger btn-lg mt-3">Learn More</Link>
                 </div>
             </section>
 
@@ -20,7 +21,7 @@ const Home = () => {
                     <p className="welcome-text">
                         We are dedicated to providing top-tier safety solutions to ensure your peace of mind. Join us in making the world a safer place.
                     </p>
-                    <button className="btn btn-primary btn-lg mt-3">Learn More</button>
+                    <Link to="/register" className="btn btn-warning btn-lg mt-3">Join Us Now!</Link>
                 </div>
             </section>
 
@@ -29,7 +30,7 @@ const Home = () => {
                 <div className="container">
                     <h1 className="hero-title display-4">Your Safety, Our Priority</h1>
                     <p className="lead">Your one-stop solution for all things awesome.</p>
-                    <button className="btn btn-light btn-lg mt-3">Get Started</button>
+                    <Link to="/login" className="btn btn-light btn-lg mt-3">Get Started</Link>
                 </div>
             </section>
 

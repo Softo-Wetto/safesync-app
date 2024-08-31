@@ -22,9 +22,9 @@ const Login = () => {
             });
 
             localStorage.setItem('token', response.data.token);
-            login(response.data.username); // Update the username in the auth state
-            navigate('/dashboard');  // Redirect to dashboard after login
-            window.location.reload(); // Force a page reload to ensure everything is up-to-date
+            login(response.data.username); 
+            navigate('/dashboard');
+            window.location.reload(); 
         } catch (err) {
             setError('Invalid email or password');
         }

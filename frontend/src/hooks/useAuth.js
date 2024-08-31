@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode';
 
 export const useAuth = () => {
     const [username, setUsername] = useState('');
@@ -9,19 +8,7 @@ export const useAuth = () => {
         const storedUsername = localStorage.getItem('username');
 
         if (token && storedUsername) {
-            try {
-                const decodedToken = jwtDecode(token);
-                const currentTime = Date.now() / 1000;
-
-                if (decodedToken.exp > currentTime) {
-                    setUsername(storedUsername);
-                } else {
-                    logout(); // Token expired, clear auth state
-                }
-            } catch (error) {
-                console.error('Invalid token:', error);
-                logout();
-            }
+            setUsername(storedUsername);
         }
     }, []);
 
@@ -38,3 +25,4 @@ export const useAuth = () => {
 
     return { username, login, logout };
 };
+
