@@ -4,7 +4,7 @@ const User = require('../models/userModel');
 exports.getUserProfile = async (req, res) => {
     try {
         const user = await User.findByPk(req.user.id, {
-            attributes: ['fullName', 'username', 'email', 'dateOfBirth', 'address', 'phoneNumber'] // Exclude password and sensitive fields
+            attributes: ['fullName', 'username', 'email', 'dateOfBirth', 'address', 'phoneNumber']
         });
 
         if (!user) {

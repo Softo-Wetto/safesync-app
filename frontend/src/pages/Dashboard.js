@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 import { FaUsers, FaDollarSign, FaProjectDiagram, FaCalendarAlt, FaChartLine, FaUserPlus, FaShoppingCart, FaMoneyBillWave } from 'react-icons/fa'; // Importing icons
 import './Dashboard.css';
 import Sidebar from '../components/Sidebar';
@@ -52,7 +53,7 @@ const Dashboard = () => {
                                 <p className="card-text">Number of projects currently active. See more below.</p>
                             </div>
                             <div className="card-footer">
-                                <button className="btn btn-light">View Details</button>
+                                <Link to="/projects" className="btn btn-light">View Details</Link> 
                             </div>
                         </div>
                     </div>

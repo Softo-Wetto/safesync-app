@@ -38,7 +38,7 @@ const Sidebar = () => {
                     </Link>
                 </li>
                 <li className="sidebar-nav-item">
-                    <Link className="sidebar-nav-link" to="#">
+                    <Link className="sidebar-nav-link" to="/projects">
                         <FaProjectDiagram className="sidebar-icon" />
                         {!isCollapsed && <span>Projects</span>}
                     </Link>
