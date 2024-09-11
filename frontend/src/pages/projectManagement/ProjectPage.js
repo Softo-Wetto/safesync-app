@@ -65,7 +65,21 @@ const ProjectPage = () => {
                             <div key={project.id} className="project-item card mb-3 shadow-sm">
                                 <div className="card-body">
                                     <h5 className="card-title">{project.name}</h5>
-                                    <p className="card-text">{project.description}</p>
+                                    <p className="card-text"><strong>Description: </strong>{project.description}</p>
+                                    <p className="card-text"><strong>Location: </strong>{project.location}</p>
+                                    <p className="card-text"><strong>Postcode: </strong>{project.postcode}</p>
+                                    <p className="card-text"><strong>City: </strong>{project.city}</p>
+
+                                    {/* If a filePath exists, show the download link */}
+                                    {project.filePath && (
+                                        <p className="card-text">
+                                            <strong>File: </strong>
+                                            <a href={`http://localhost:5000/${project.filePath}`} target="_blank" rel="noopener noreferrer">
+                                                Download File
+                                            </a>
+                                        </p>
+                                    )}
+
                                     <Link to={`/projects/${project.id}`} className="btn btn-primary me-2">
                                         View Details
                                     </Link>

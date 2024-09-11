@@ -1,10 +1,11 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const { sequelize } = require('./config/db'); // Import sequelize from the config
+const { sequelize } = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const activityRoutes = require('./routes/activityRoutes');
+const path = require('path');
 
 dotenv.config();
 
@@ -13,7 +14,7 @@ const connectDB = async () => {
     try {
         await sequelize.authenticate();
         console.log('Database connected...');
-        await sequelize.sync();
+        await sequelize.sync({ alter: true }); // This will alter the table and add new fields
         console.log('Models synchronized...');
     } catch (err) {
         console.error('Error connecting to the database:', err);
@@ -34,9 +35,11 @@ app.use(cors({
     credentials: true,
 }));
 
+// Serve static files from the 'uploads' folder
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
-
 app.use('/api/projects', projectRoutes);
 app.use('/api/projects', activityRoutes);
 

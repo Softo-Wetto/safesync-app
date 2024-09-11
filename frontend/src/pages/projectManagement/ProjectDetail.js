@@ -59,7 +59,17 @@ const ProjectDetail = () => {
             <Sidebar />
             <div className="container-fluid">
                 <h1>{project.name}</h1>
-                <p>{project.description}</p>
+                <p><strong>Description:</strong> {project.description}</p>
+                <p><strong>Location:</strong> {project.location}</p>
+                <p><strong>Postcode:</strong> {project.postcode}</p>
+                <p><strong>City:</strong> {project.city}</p>
+                
+                {/* Check if a file was uploaded and display the download link */}
+                {project.filePath && (
+                    <p>
+                        <strong>File:</strong> <a href={`http://localhost:5000/${project.filePath}`} target="_blank" rel="noopener noreferrer">Download File</a>
+                    </p>
+                )}
 
                 <hr />
 

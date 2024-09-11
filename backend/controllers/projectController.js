@@ -1,5 +1,6 @@
 const { Op } = require('sequelize');
 const Project = require('../models/projectModel');
+const path = require('path');
 
 // Get all projects
 exports.getAllProjects = async (req, res) => {
@@ -31,30 +32,56 @@ exports.getProjectById = async (req, res) => {
 // Create a new project
 exports.createProject = async (req, res) => {
     try {
-      const { name, description } = req.body;
-  
-      // Validate the inputs
-      if (!name || !description) {
-        return res.status(400).json({ error: 'Name and description are required' });
-      }
-  
-      const newProject = await Project.create({ name, description });
-      res.status(201).json({ message: 'Project created successfully', project: newProject });
+        const { name, description, location, postcode, city } = req.body;
+
+        // Validate the inputs
+        if (!name || !description || !location || !postcode || !city) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+
+        // Handle file upload
+        let filePath = null;
+        if (req.file) {
+            filePath = path.join(__dirname, '..', 'uploads', req.file.filename);
+        }
+
+        const newProject = await Project.create({
+            name,
+            description,
+            location,
+            postcode,
+            city,
+            filePath, // Store the file path if a file is uploaded
+        });
+
+        res.status(201).json({ message: 'Project created successfully', project: newProject });
     } catch (err) {
-      console.error('Error creating project:', err.message);
-      res.status(500).json({ error: 'Failed to create project' });
+        console.error('Error creating project:', err.message);
+        res.status(500).json({ error: 'Failed to create project' });
     }
 };
 
 // Update a project
 exports.updateProject = async (req, res) => {
-    const { name, description } = req.body;
+    const { name, description, location, postcode, city } = req.body;
     try {
         const project = await Project.findByPk(req.params.projectID);
         if (!project) return res.status(404).json({ error: 'Project not found' });
+
+        // Update the project fields
         project.name = name || project.name;
         project.description = description || project.description;
-        await project.save();
+        project.location = location || project.location;
+        project.postcode = postcode || project.postcode;
+        project.city = city || project.city;
+
+        // Handle file upload if present
+        if (req.file) {
+            const filePath = path.join('uploads', req.file.filename);
+            project.filePath = filePath;
+        }
+
+        await project.save(); // Save changes to the database
         res.json(project);
     } catch (err) {
         res.status(500).json({ error: 'Server error' });
