@@ -1,19 +1,17 @@
-/* Dashboard.css */
-
-/* General Container Styling */
-.dashboard-container {
+/* Dashboard Specific Styling */
+.dashboard-page .dashboard-container {
     display: flex;
-    flex: 1; /* Ensure it takes all the available vertical space */
+    flex: 1;
 }
 
 /* Main Content Styling */
-.dashboard-container-fluid {
-    padding: 20px; /* Add padding around the main content */
-    padding-top: 20px; /* Adjust padding from the top */
-    overflow-y: auto; /* Allow scrolling within the main content */
+.dashboard-page .dashboard-container-fluid {
+    padding: 20px;
+    padding-top: 20px;
+    overflow-y: auto;
 }
 
-.d-flex .h1, .h2 {
+.dashboard-page .h1, .dashboard-page .h2 {
     color: #000000;
     margin-bottom: 20px;
 }
@@ -30,105 +28,84 @@
     }
 }
 
-@keyframes slideInLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    0% {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.dashboard-container .card {
-    border-radius: 12px; /* More rounded corners */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Stronger shadow for depth */
+.dashboard-page .card {
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background: #ffffff; /* White background for clean contrast */
-    animation: fadeInUp 0.6s ease-out; /* Apply fade-in-up animation */
+    background: #ffffff;
+    animation: fadeInUp 0.6s ease-out;
     opacity: 0;
-    animation-fill-mode: forwards; /* Ensures the card stays in the final state */
+    animation-fill-mode: forwards;
 }
 
-.dashboard-container .card:hover {
-    transform: scale(1.05); /* Scale up slightly on hover */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+.dashboard-page .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
-.card-header {
+.dashboard-page .card-header {
     font-size: 1.4rem;
     font-weight: 600;
-    animation: slideInLeft 0.6s ease-out; /* Slide in animation for header */
+    animation: slideInLeft 0.6s ease-out;
+    color: #000000;
 }
 
-.card-body h5 {
+.dashboard-page .card-body h5 {
     font-size: 1.8rem;
     margin-bottom: 10px;
-    animation: slideInRight 0.6s ease-out; /* Slide in animation for body */
+    animation: slideInRight 0.6s ease-out;
 }
 
-.card-footer .btn {
+.dashboard-page .card-footer .btn {
     background-color: #007bff;
     color: white;
     border-radius: 6px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-footer .btn:hover {
+.dashboard-page .card-footer .btn:hover {
     background-color: #0056b3;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect on buttons */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Button Customization */
-.btn-outline-light {
+.dashboard-page .btn-outline-light {
     border: 1px solid #007bff;
     color: #007bff;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.btn-outline-light:hover {
+.dashboard-page .btn-outline-light:hover {
     background-color: #007bff;
     color: white;
 }
 
 /* Recent Activity Section */
-.recent-activity .card {
+.dashboard-page .recent-activity .card {
     background-color: #ffffff;
     border-left: 4px solid #007bff;
-    animation: fadeInUp 0.6s ease-out; /* Fade in for recent activity cards */
+    animation: fadeInUp 0.6s ease-out;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-    .container-fluid {
+    .dashboard-page .container-fluid {
         margin-left: 0;
         padding: 15px;
-        padding-top: 20px; /* Adjust padding for smaller screens */
+        padding-top: 20px;
     }
 
-    .sidebar {
+    .dashboard-page .sidebar {
         width: 100%;
         height: auto;
         position: relative;
     }
 
-    .sidebar-nav-link {
+    .dashboard-page .sidebar-nav-link {
         justify-content: center;
     }
 
-    .sidebar-icon {
+    .dashboard-page .sidebar-icon {
         margin-right: 0;
     }
 }
