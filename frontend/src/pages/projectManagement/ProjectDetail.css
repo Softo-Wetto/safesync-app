@@ -1,42 +1,49 @@
 .project-detail-card {
     margin-top: 20px;
-    border-radius: 10px; /* Ensure consistent border radius */
-    overflow: hidden; /* Prevent content from overflowing the card's rounded corners */
-    position: relative;
-    background-color: #ffffff; /* Ensure background color matches the card */
+    border-radius: 10px;
+    background-color: #ffffff;
+    border: none;
+    overflow: hidden;
 }
 
 .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    background-color: #ffffff;
+    padding: 20px;
+    background-color: #f8f9fa;
     border-bottom: 1px solid #e3e3e3;
-    border-top-left-radius: 10px; /* Ensure top-left border radius */
-    border-top-right-radius: 10px; /* Ensure top-right border radius */
-    position: relative; /* Ensure the back button is positioned relative to this container */
 }
 
 .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
     margin: 0;
 }
 
 .back-button {
     position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 1.9rem;
-    color: #007bff; /* Light blue color */
-    border: none;
+    right: 15px;
+    top: 15px;
+    font-size: 1.5rem;
+    color: #007bff;
     background: none;
+    border: none;
+}
+
+.activity-list .activity-item {
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.card-body p {
+    margin-bottom: 10px;
 }
 
 .project-actions {
     display: flex;
     justify-content: flex-end;
-    padding: 15px;
-    background-color: #ffffff;
+    padding-top: 20px;
     border-top: 1px solid #e3e3e3;
 }
 
@@ -44,12 +51,19 @@
     margin-left: 10px;
 }
 
-.card-body p {
-    margin-bottom: 10px;
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.btn-light {
-    color: #007bff;
-    background-color: #ffffff;
-    border-color: #e3e3e3;
+.activity-item .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.activity-item .card-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
 }

@@ -6,21 +6,36 @@ const userRoutes = require('./routes/userRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const activityRoutes = require('./routes/activityRoutes');
 const path = require('path');
-
+const Project = require('./models/projectModel');
+const Activity = require('./models/activityModel');
 dotenv.config();
 
 // Connect to the database
 const connectDB = async () => {
     try {
-        await sequelize.authenticate();
+        await sequelize.authenticate(); // First authenticate the connection
         console.log('Database connected...');
-        await sequelize.sync({ alter: true }); // This will alter the table and add new fields
+        
+        // Sync the models, including altering tables to match the models
+        await sequelize.sync({ alter: true }); // This will add any missing fields or modify existing ones
         console.log('Models synchronized...');
     } catch (err) {
         console.error('Error connecting to the database:', err);
-        process.exit(1); // Exit process with failure
+        process.exit(1); // Exit process with failure if there is a problem
     }
 };
+
+Project.associate({ Activity });
+Activity.associate({ Project });
+
+
+sequelize.sync({ alter: true }).then(() => {
+    console.log('Database synchronized');
+}).catch((error) => {
+    console.error('Error syncing the database:', error);
+});
+
+
 
 connectDB();
 
@@ -42,6 +57,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/projects', activityRoutes);
+app.use('/api/projects/:projectId/activities', activityRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

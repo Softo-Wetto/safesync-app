@@ -92,6 +92,20 @@ const ProjectPage = () => {
                                             <strong>City: </strong>{project.city}
                                         </p>
 
+                                        {/* Activities Section */}
+                                        {project.activities && project.activities.length > 0 && (
+                                            <div className="activities-section">
+                                                <h6>Activities:</h6>
+                                                <ul>
+                                                    {project.activities.map((activity) => (
+                                                        <li key={activity.id}>
+                                                            {activity.name} - Outcome: {activity.outcome}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+
                                         {/* File Download Link */}
                                         {project.filePath && (
                                             <p className="card-text">

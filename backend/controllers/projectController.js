@@ -1,5 +1,6 @@
 const { Op } = require('sequelize');
 const Project = require('../models/projectModel');
+const Activity = require('../models/activityModel');
 const path = require('path');
 
 // Get all projects
@@ -9,6 +10,13 @@ exports.getAllProjects = async (req, res) => {
         console.log('Fetching projects...'); // Log when this route is hit
         const projects = await Project.findAll({
             where: search ? { name: { [Op.like]: `%${search}%` } } : {},
+            include: [
+                {
+                    model: Activity, // Include related activities
+                    as: 'activities', // Ensure this alias matches your model association
+                    attributes: ['id', 'name', 'description', 'outcome'], // Specify the fields you want to return
+                },
+            ],
         });
         console.log('Projects fetched:', projects); // Log the fetched projects
         res.json(projects);
@@ -18,16 +26,26 @@ exports.getAllProjects = async (req, res) => {
     }
 };
 
+
 // Get project by ID
 exports.getProjectById = async (req, res) => {
     try {
-        const project = await Project.findByPk(req.params.projectID);
+        const project = await Project.findByPk(req.params.projectID, {
+            include: [
+                {
+                    model: Activity, // Include related activities
+                    as: 'activities', // Ensure this alias matches your model association
+                    attributes: ['id', 'name', 'description', 'outcome'], // Specify the fields you want to return
+                },
+            ],
+        });
         if (!project) return res.status(404).json({ error: 'Project not found' });
         res.json(project);
     } catch (err) {
         res.status(500).json({ error: 'Server error' });
     }
 };
+
 
 // Create a new project
 exports.createProject = async (req, res) => {

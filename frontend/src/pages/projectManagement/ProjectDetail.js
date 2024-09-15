@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Sidebar from '../../components/Sidebar'; 
+import Sidebar from '../../components/Sidebar';
 import { Link, useParams } from 'react-router-dom';
-import './ProjectDetail.css'; // Ensure to add your styles
+import './ProjectDetail.css';
 
 const ProjectDetail = () => {
     const { projectID } = useParams();
@@ -10,7 +10,7 @@ const ProjectDetail = () => {
     const [activities, setActivities] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
-    
+
     useEffect(() => {
         const fetchProject = async () => {
             try {
@@ -46,7 +46,7 @@ const ProjectDetail = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="loading-spinner">Loading...</div>;
     }
 
     if (error) {
@@ -65,15 +65,18 @@ const ProjectDetail = () => {
                         </Link>
                     </div>
                     <div className="card-body">
-                        <p><strong>Type:</strong> {project.type}</p>
-                        <p><strong>Description:</strong> {project.description}</p>
+                        <p><strong>Type:</strong> {project.type || 'N/A'}</p>
+                        <p><strong>Description:</strong> {project.description || 'No description provided.'}</p>
                         <p><strong>Location:</strong> {project.location}</p>
                         <p><strong>Postcode:</strong> {project.postcode}</p>
                         <p><strong>City:</strong> {project.city}</p>
-                        
+
                         {project.filePath && (
                             <p>
-                                <strong>File:</strong> <a href={`http://localhost:5000/${project.filePath}`} target="_blank" rel="noopener noreferrer">Download File</a>
+                                <strong>File:</strong>{' '}
+                                <a href={`http://localhost:5000/${project.filePath}`} target="_blank" rel="noopener noreferrer">
+                                    Download File
+                                </a>
                             </p>
                         )}
 
@@ -81,17 +84,25 @@ const ProjectDetail = () => {
 
                         <h3>Project Activities</h3>
                         {activities.length > 0 ? (
-                            <ul className="list-group">
-                                {activities.map(activity => (
-                                    <li key={activity.id} className="list-group-item">
-                                        <h5>{activity.name}</h5>
-                                        <p>{activity.description}</p>
-                                    </li>
+                            <div className="activity-list">
+                                {activities.map((activity) => (
+                                    <div key={activity.id} className="activity-item card mb-3 shadow-sm">
+                                        <div className="card-body">
+                                            <h5 className="card-title">{activity.name}</h5>
+                                            <p className="card-text">{activity.description}</p>
+                                            <p><strong>Outcome:</strong> {getOutcomeLabel(activity.outcome)}</p>
+                                            <p><strong>Type:</strong> {activity.activityType}</p>
+                                            <Link to={`/projects/${projectID}/activities/${activity.id}/update`} className="btn btn-outline-secondary">
+                                                Update Activity
+                                            </Link>
+                                        </div>
+                                    </div>
                                 ))}
-                            </ul>
+                            </div>
                         ) : (
                             <p>No activities found for this project.</p>
                         )}
+
                         <br />
                         <Link to={`/projects/${projectID}/activities`} className="btn btn-primary me-2">
                             Manage Activities
@@ -103,7 +114,7 @@ const ProjectDetail = () => {
                             <Link to={`/projects/${projectID}/update`} className="btn btn-secondary me-2">
                                 Update Project
                             </Link>
-                            <button className="btn btn-danger me-2" onClick={() => handleDeleteProject(projectID)}>
+                            <button className="btn btn-danger" onClick={() => handleDeleteProject(projectID)}>
                                 Delete Project
                             </button>
                         </div>
@@ -112,6 +123,21 @@ const ProjectDetail = () => {
             </div>
         </div>
     );
+};
+
+const getOutcomeLabel = (outcome) => {
+    switch (outcome) {
+        case 'C':
+            return 'Compliance';
+        case 'NC':
+            return 'Non-Compliance';
+        case 'N/A':
+            return 'Not Applicable';
+        case 'U/V':
+            return 'Unable to Verify';
+        default:
+            return 'Unknown';
+    }
 };
 
 export default ProjectDetail;

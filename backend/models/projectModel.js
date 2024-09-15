@@ -7,24 +7,29 @@ const Project = sequelize.define('Project', {
         allowNull: false,
     },
     description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
+        allowNull: false,
     },
     location: {
         type: DataTypes.STRING,
-        allowNull: false, // Assuming location is required
+        allowNull: false,
     },
     postcode: {
         type: DataTypes.STRING,
-        allowNull: false, // Assuming postcode is required
+        allowNull: false,
     },
     city: {
         type: DataTypes.STRING,
-        allowNull: false, // Assuming city is required
+        allowNull: false,
     },
     filePath: {
-        type: DataTypes.STRING, // Store the file path
-        allowNull: true, // Make this optional
+        type: DataTypes.STRING,
     },
 }, { timestamps: true });
+
+// Association with Activity model
+Project.associate = (models) => {
+    Project.hasMany(models.Activity, { as: 'activities', foreignKey: 'projectId' });
+};
 
 module.exports = Project;
