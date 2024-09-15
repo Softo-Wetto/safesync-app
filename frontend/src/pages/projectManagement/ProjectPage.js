@@ -27,30 +27,32 @@ const ProjectPage = () => {
         fetchProjects();
     }, [searchQuery]);
 
-    const handleDeleteProject = async (projectId) => {
-        try {
-            await axios.delete(`http://localhost:5000/api/projects/${projectId}/remove`);
-            setProjects((prev) => prev.filter((project) => project.id !== projectId));
-        } catch (err) {
-            console.error('Error deleting project:', err);
-            setError('Failed to delete project.');
-        }
-    };
-
     return (
         <div className="d-flex">
             <Sidebar />
             <div className="project-page container-fluid">
-                <h1 className="mb-4">Projects</h1>
+                <div className="d-flex justify-content-between align-items-center mb-4">
+                    <h1 className="mb-0">Project List</h1>
+                    <Link to="/projects/create" className="btn btn-success btn-lg">
+                        Create New Project
+                    </Link>
+                </div>
 
                 {/* Search */}
-                <input
-                    type="text"
-                    placeholder="Search projects..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="form-control mb-4"
-                />
+                <div className="mb-4 position-relative">
+                    <input
+                        type="text"
+                        placeholder="Search projects..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="form-control border rounded-pill ps-5"
+                        style={{ borderRadius: '25px' }}
+                    />
+                    <i
+                        className="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3"
+                        style={{ fontSize: '1.2rem', color: '#6c757d' }}
+                    ></i>
+                </div>
 
                 {/* Loading/Error */}
                 {loading ? (
@@ -62,44 +64,53 @@ const ProjectPage = () => {
                 ) : (
                     <div className="project-list">
                         {projects.map((project) => (
-                            <div key={project.id} className="project-item card mb-3 shadow-sm">
+                            <div 
+                                key={project.id} 
+                                className="project-item card mb-3 shadow-sm"
+                                style={{ cursor: 'pointer' }} // Pointer cursor to indicate clickable
+                                onClick={() => window.location.href = `/projects/${project.id}`} // Navigate to project details
+                            >
                                 <div className="card-body">
-                                    <h5 className="card-title">{project.name}</h5>
-                                    <p className="card-text"><strong>Description: </strong>{project.description}</p>
-                                    <p className="card-text"><strong>Location: </strong>{project.location}</p>
-                                    <p className="card-text"><strong>Postcode: </strong>{project.postcode}</p>
-                                    <p className="card-text"><strong>City: </strong>{project.city}</p>
+                                    {/* Project Title */}
+                                    <h5 className="card-title text-center">{project.name}</h5>
 
-                                    {/* If a filePath exists, show the download link */}
-                                    {project.filePath && (
+                                    {/* Project Details Container with Darker Background and More Rounded Corners */}
+                                    <div className="project-details p-3 mb-3" style={{ backgroundColor: '#e2e3e5', borderRadius: '10px' }}>
                                         <p className="card-text">
-                                            <strong>File: </strong>
-                                            <a href={`http://localhost:5000/${project.filePath}`} target="_blank" rel="noopener noreferrer">
-                                                Download File
-                                            </a>
+                                            <strong>Type: </strong>{project.type}
                                         </p>
-                                    )}
+                                        <p className="card-text">
+                                            <strong>Description: </strong>{project.description}
+                                        </p>
+                                        <p className="card-text">
+                                            <strong>Location: </strong>{project.location}
+                                        </p>
+                                        <p className="card-text">
+                                            <strong>Postcode: </strong>{project.postcode}
+                                        </p>
+                                        <p className="card-text">
+                                            <strong>City: </strong>{project.city}
+                                        </p>
 
-                                    <Link to={`/projects/${project.id}`} className="btn btn-primary me-2">
-                                        View Details
-                                    </Link>
-                                    <Link to={`/projects/${project.id}/update`} className="btn btn-secondary me-2">
-                                        Update
-                                    </Link>
-                                    <button
-                                        className="btn btn-danger"
-                                        onClick={() => handleDeleteProject(project.id)}
-                                    >
-                                        Delete
-                                    </button>
+                                        {/* File Download Link */}
+                                        {project.filePath && (
+                                            <p className="card-text">
+                                                <strong>File: </strong>
+                                                <a
+                                                    href={`http://localhost:5000/${project.filePath}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    Download File
+                                                </a>
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         ))}
                     </div>
                 )}
-                <Link to="/projects/create" className="btn btn-success mt-4">
-                    Create New Project
-                </Link>
             </div>
         </div>
     );

@@ -1,0 +1,55 @@
+.project-detail-card {
+    margin-top: 20px;
+    border-radius: 10px; /* Ensure consistent border radius */
+    overflow: hidden; /* Prevent content from overflowing the card's rounded corners */
+    position: relative;
+    background-color: #ffffff; /* Ensure background color matches the card */
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e3e3e3;
+    border-top-left-radius: 10px; /* Ensure top-left border radius */
+    border-top-right-radius: 10px; /* Ensure top-right border radius */
+    position: relative; /* Ensure the back button is positioned relative to this container */
+}
+
+.card-title {
+    margin: 0;
+}
+
+.back-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 1.9rem;
+    color: #007bff; /* Light blue color */
+    border: none;
+    background: none;
+}
+
+.project-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+    background-color: #ffffff;
+    border-top: 1px solid #e3e3e3;
+}
+
+.project-actions .btn {
+    margin-left: 10px;
+}
+
+.card-body p {
+    margin-bottom: 10px;
+}
+
+.btn-light {
+    color: #007bff;
+    background-color: #ffffff;
+    border-color: #e3e3e3;
+}
