@@ -44,6 +44,11 @@ const ActivityPage = () => {
                     </Link>
                 </div>
 
+                {/* Back to Project Detail button */}
+                <Link to={`/projects/${projectID}`} className="btn btn-light back-button mb-4">
+                    <i className="bi bi-arrow-left"></i> Back to Project
+                </Link>
+
                 {loading ? (
                     <div className="text-center">
                         <div className="spinner-border" role="status">
@@ -69,7 +74,7 @@ const ActivityPage = () => {
                                             </span>
                                         </p>
                                         <p>
-                                            <strong>Activity Type: </strong> {activity.activityType} {/* Display activityType here */}
+                                            <strong>Activity Type: </strong> {activity.activityType} 
                                         </p>
                                         <div className="d-flex justify-content-between mt-3">
                                             <Link to={`/projects/${projectID}/activities/${activity.id}/update`} className="btn btn-outline-secondary">
@@ -93,14 +98,14 @@ const ActivityPage = () => {
 // Helper functions for outcome labels and badge styling
 const getOutcomeLabel = (outcome) => {
     switch (outcome) {
-        case 'C':
-            return 'Compliance';
+        case 'NS':
+            return 'Not Started';
         case 'NC':
-            return 'Non-Compliance';
-        case 'N/A':
-            return 'Not Applicable';
-        case 'U/V':
-            return 'Unable to Verify';
+            return 'Not Completed';
+        case 'PC':
+            return 'Partially Completed';
+        case 'C':
+            return 'Completed';
         default:
             return 'Unknown';
     }
@@ -110,11 +115,11 @@ const getBadgeClass = (outcome) => {
     switch (outcome) {
         case 'C':
             return 'success'; // Green badge for compliance
-        case 'NC':
+        case 'NS':
             return 'danger'; // Red badge for non-compliance
-        case 'N/A':
+        case 'PC':
             return 'secondary'; // Gray badge for not applicable
-        case 'U/V':
+        case 'NC':
             return 'warning'; // Yellow badge for unable to verify
         default:
             return 'dark'; // Dark badge for unknown outcome

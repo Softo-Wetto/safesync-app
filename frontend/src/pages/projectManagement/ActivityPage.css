@@ -18,3 +18,14 @@
     width: 3rem;
     height: 3rem;
 }
+
+.back-button {
+    position: relative;
+    display: inline-block;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}

@@ -78,10 +78,10 @@ const UpdateActivity = () => {
                             onChange={(e) => setOutcome(e.target.value)}
                             required
                         >
-                            <option value="C">C – Compliance</option>
-                            <option value="NC">NC – Non-Compliance</option>
-                            <option value="N/A">N/A – Not Applicable</option>
-                            <option value="U/V">U/V - Unable to Verify</option>
+                            <option value="NS">Not Started</option>
+                            <option value="NC">Not Completed</option>
+                            <option value="PC">Partially Completed</option>
+                            <option value="C">Completed</option>
                         </select>
                     </div>
                     <div className="mb-3">

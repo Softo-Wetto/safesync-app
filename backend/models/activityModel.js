@@ -10,7 +10,7 @@ const Activity = sequelize.define('Activity', {
         type: DataTypes.STRING,
     },
     outcome: {
-        type: DataTypes.ENUM('C', 'NC', 'N/A', 'U/V'),
+        type: DataTypes.ENUM('C', 'NC', 'PC', 'NS'),
         allowNull: false,
     },
     activityType: {  // Add this new field for activity type

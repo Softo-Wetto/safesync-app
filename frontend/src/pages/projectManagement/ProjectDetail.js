@@ -3,6 +3,7 @@ import axios from 'axios';
 import Sidebar from '../../components/Sidebar';
 import { Link, useParams } from 'react-router-dom';
 import './ProjectDetail.css';
+import './ActivityPage.css'; // Importing ActivityPage CSS for consistency
 
 const ProjectDetail = () => {
     const { projectID } = useParams();
@@ -84,17 +85,26 @@ const ProjectDetail = () => {
 
                         <h3>Project Activities</h3>
                         {activities.length > 0 ? (
-                            <div className="activity-list">
+                            <div className="row">
                                 {activities.map((activity) => (
-                                    <div key={activity.id} className="activity-item card mb-3 shadow-sm">
-                                        <div className="card-body">
-                                            <h5 className="card-title">{activity.name}</h5>
-                                            <p className="card-text">{activity.description}</p>
-                                            <p><strong>Outcome:</strong> {getOutcomeLabel(activity.outcome)}</p>
-                                            <p><strong>Type:</strong> {activity.activityType}</p>
-                                            <Link to={`/projects/${projectID}/activities/${activity.id}/update`} className="btn btn-outline-secondary">
-                                                Update Activity
-                                            </Link>
+                                    <div key={activity.id} className="col-md-6 col-lg-4">
+                                        <div className="card mb-4 shadow-sm">
+                                            <div className="card-body">
+                                                <h5 className="card-title">{activity.name}</h5>
+                                                <p className="card-text">{activity.description}</p>
+                                                <p>
+                                                    <strong>Outcome: </strong>
+                                                    <span className={`badge bg-${getBadgeClass(activity.outcome)}`}>
+                                                        {getOutcomeLabel(activity.outcome)}
+                                                    </span>
+                                                </p>
+                                                <p><strong>Type:</strong> {activity.activityType}</p>
+                                                <div className="d-flex justify-content-between mt-3">
+                                                    <Link to={`/projects/${projectID}/activities/${activity.id}/update`} className="btn btn-outline-secondary">
+                                                        Update
+                                                    </Link>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
@@ -127,16 +137,31 @@ const ProjectDetail = () => {
 
 const getOutcomeLabel = (outcome) => {
     switch (outcome) {
-        case 'C':
-            return 'Compliance';
+        case 'NS':
+            return 'Not Started';
         case 'NC':
-            return 'Non-Compliance';
-        case 'N/A':
-            return 'Not Applicable';
-        case 'U/V':
-            return 'Unable to Verify';
+            return 'Not Completed';
+        case 'PC':
+            return 'Partially Completed';
+        case 'C':
+            return 'Completed';
         default:
             return 'Unknown';
+    }
+};
+
+const getBadgeClass = (outcome) => {
+    switch (outcome) {
+        case 'C':
+            return 'success';
+        case 'NS':
+            return 'danger';
+        case 'PC':
+            return 'secondary';
+        case 'NC':
+            return 'warning';
+        default:
+            return 'dark';
     }
 };
 

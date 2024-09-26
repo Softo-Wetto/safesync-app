@@ -34,21 +34,13 @@
 .activity-list .activity-item {
     border-radius: 10px;
     padding: 15px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-body p {
-    margin-bottom: 10px;
-}
-
-.project-actions {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 20px;
-    border-top: 1px solid #e3e3e3;
-}
-
-.project-actions .btn {
-    margin-left: 10px;
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .loading-spinner {
@@ -66,4 +58,20 @@
 .activity-item .card-text {
     font-size: 1rem;
     margin-bottom: 10px;
+}
+
+.badge {
+    font-size: 0.9rem;
+    padding: 0.4em 0.8em;
+}
+
+.project-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    border-top: 1px solid #e3e3e3;
+}
+
+.project-actions .btn {
+    margin-left: 10px;
 }
