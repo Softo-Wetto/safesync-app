@@ -20,7 +20,7 @@ const Profile = () => {
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/user/profile', {
+                const response = await axios.get('http://localhost:5000/api/users/profile', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -59,7 +59,7 @@ const Profile = () => {
         }
 
         try {
-            const response = await axios.put('http://localhost:5000/api/user/profile', formData, {
+            const response = await axios.put('http://localhost:5000/api/users/profile', formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -81,7 +81,7 @@ const Profile = () => {
 
     const handleDeleteAccount = async () => {
         try {
-            const response = await axios.delete('http://localhost:5000/api/user/profile', {
+            const response = await axios.delete('http://localhost:5000/api/users/profile', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

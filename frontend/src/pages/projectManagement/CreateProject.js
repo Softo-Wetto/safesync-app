@@ -9,13 +9,8 @@ const CreateProject = () => {
     const [postcode, setPostcode] = useState('');
     const [city, setCity] = useState('');
     const [description, setDescription] = useState('');
-    const [file, setFile] = useState(null); // For file upload
     const [error, setError] = useState('');
     const navigate = useNavigate();
-
-    const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,22 +21,17 @@ const CreateProject = () => {
             return;
         }
 
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('location', location);
-        formData.append('postcode', postcode);
-        formData.append('city', city);
-        formData.append('description', description);
-        if (file) {
-            formData.append('file', file);
-        }
+        // Create project data without file
+        const projectData = {
+            name,
+            location,
+            postcode,
+            city,
+            description,
+        };
 
         try {
-            const response = await axios.post('http://localhost:5000/api/projects/create', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            const response = await axios.post('http://localhost:5000/api/projects/create', projectData);
             if (response.status === 201) {
                 navigate('/projects');
             } else {
@@ -58,7 +48,7 @@ const CreateProject = () => {
             <Sidebar />
             <div className="container-fluid">
                 <h1>Create New Project</h1>
-                <form onSubmit={handleSubmit} encType="multipart/form-data">
+                <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label className="form-label">Project Name</label>
                         <input
@@ -108,14 +98,6 @@ const CreateProject = () => {
                             rows="5"
                             required
                         ></textarea>
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Upload File</label>
-                        <input 
-                            type="file" 
-                            className="form-control" 
-                            onChange={handleFileChange} 
-                        />
                     </div>
                     {error && <p className="text-danger">{error}</p>}
                     <button type="submit" className="btn btn-primary">Create Project</button>

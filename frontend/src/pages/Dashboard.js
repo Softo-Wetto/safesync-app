@@ -17,14 +17,14 @@ const Dashboard = () => {
                         <div className="col-md-4">
                             <div className="card text-bg-primary mb-3 shadow-lg rounded">
                                 <div className="card-header d-flex align-items-center">
-                                    <FaUsers className="me-2" /> Total Users
+                                    <FaUsers className="me-2" /> Users
                                 </div>
                                 <div className="card-body">
-                                    <h5 className="card-title">1,234</h5>
+                                    <h5 className="card-title">3</h5>
                                     <p className="card-text">Total number of users registered on the platform.</p>
                                 </div>
                                 <div className="card-footer">
-                                    <button className="btn btn-light">View Details</button>
+                                    <Link to="/users" className="btn btn-light">View Details</Link>
                                 </div>
                             </div>
                         </div>
@@ -62,14 +62,14 @@ const Dashboard = () => {
                         <div className="col-md-4">
                             <div className="card text-bg-info mb-3 shadow-lg rounded">
                                 <div className="card-header d-flex align-items-center">
-                                    <FaCalendarAlt className="me-2" /> Upcoming Events
+                                    <FaCalendarAlt className="me-2" /> Events
                                 </div>
                                 <div className="card-body">
                                     <h5 className="card-title">5</h5>
                                     <p className="card-text">Events scheduled for the upcoming month.</p>
                                 </div>
                                 <div className="card-footer">
-                                    <button className="btn btn-light">View Events</button>
+                                <Link to="/calendar" className="btn btn-light">View Details</Link>
                                 </div>
                             </div>
                         </div>

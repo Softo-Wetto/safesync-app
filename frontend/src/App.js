@@ -12,6 +12,7 @@ import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 
+import ViewActivity from './pages/projectManagement/ViewActivity';  
 import ProjectPage from './pages/projectManagement/ProjectPage';
 import ProjectDetail from './pages/projectManagement/ProjectDetail';
 import CreateProject from './pages/projectManagement/CreateProject';
@@ -19,6 +20,10 @@ import UpdateProject from './pages/projectManagement/UpdateProject';
 import ActivityPage from './pages/projectManagement/ActivityPage';
 import AddActivity from './pages/projectManagement/AddActivity';
 import UpdateActivity from './pages/projectManagement/UpdateActivity'; 
+
+import UserPage from './pages/userManagement/UserPage';
+
+import CalendarPage from './pages/calendarManagement/CalendarPage';
 
 import './App.css';
 
@@ -37,6 +42,7 @@ function App() {
                     <Route path="/profile" element={<Profile />} />
 
                     {/* Project Management Routes */}
+                    <Route path="/projects/:projectID/activities/:activityID/view" element={<ViewActivity />} />
                     <Route path="/projects" element={<ProjectPage />} />
                     <Route path="/projects/create" element={<CreateProject />} />
                     <Route path="/projects/:projectID" element={<ProjectDetail />} />
@@ -44,6 +50,12 @@ function App() {
                     <Route path="/projects/:projectID/activities" element={<ActivityPage />} />
                     <Route path="/projects/:projectID/activities/add" element={<AddActivity />} />
                     <Route path="/projects/:projectID/activities/:activityId/update" element={<UpdateActivity />} />
+
+                    {/* User Management Routes */}
+                    <Route path="/users" element={<UserPage />} />
+
+                    {/* Calendar Management Routes */}
+                    <Route path="/calendar" element={<CalendarPage />} />
                 </Routes>
             </div>
             <Footer />

@@ -14,9 +14,10 @@ exports.getAllProjects = async (req, res) => {
                 {
                     model: Activity, // Include related activities
                     as: 'activities', // Ensure this alias matches your model association
-                    attributes: ['id', 'name', 'description', 'outcome'], // Specify the fields you want to return
+                    attributes: ['id', 'name', 'description', 'outcome', 'createdAt', 'updatedAt'], // Include timestamps
                 },
             ],
+            attributes: ['id', 'name', 'description', 'location', 'postcode', 'city', 'createdAt', 'updatedAt'], // Include timestamps
         });
         console.log('Projects fetched:', projects); // Log the fetched projects
         res.json(projects);
@@ -35,9 +36,10 @@ exports.getProjectById = async (req, res) => {
                 {
                     model: Activity, // Include related activities
                     as: 'activities', // Ensure this alias matches your model association
-                    attributes: ['id', 'name', 'description', 'outcome'], // Specify the fields you want to return
+                    attributes: ['id', 'name', 'description', 'outcome', 'createdAt', 'updatedAt'], // Include timestamps
                 },
             ],
+            attributes: ['id', 'name', 'description', 'location', 'postcode', 'city', 'createdAt', 'updatedAt'], // Include timestamps
         });
         if (!project) return res.status(404).json({ error: 'Project not found' });
         res.json(project);
@@ -114,6 +116,29 @@ exports.deleteProject = async (req, res) => {
         await project.destroy();
         res.json({ message: 'Project deleted successfully' });
     } catch (err) {
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
+exports.getProjects = async (req, res) => {
+    const { search } = req.query; // Get the search query parameter
+    try {
+        console.log('Fetching projects...'); // Log when this route is hit
+        const projects = await Project.findAll({
+            where: search ? { name: { [Op.like]: `%${search}%` } } : {},
+            include: [
+                {
+                    model: Activity, // Include related activities
+                    as: 'activities', // Ensure this alias matches your model association
+                    attributes: ['id', 'name', 'description', 'outcome', 'createdAt', 'updatedAt'], // Include timestamps
+                },
+            ],
+            attributes: ['id', 'name', 'description', 'location', 'postcode', 'city', 'createdAt', 'updatedAt'], // Include timestamps
+        });
+        console.log('Projects fetched:', projects); // Log the fetched projects
+        res.json(projects);
+    } catch (err) {
+        console.error('Error fetching projects:', err);
         res.status(500).json({ error: 'Server error' });
     }
 };

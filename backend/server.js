@@ -10,33 +10,14 @@ const Project = require('./models/projectModel');
 const Activity = require('./models/activityModel');
 dotenv.config();
 
-// Connect to the database
-const connectDB = async () => {
-    try {
-        await sequelize.authenticate(); // First authenticate the connection
-        console.log('Database connected...');
-        
-        // Sync the models, including altering tables to match the models
-        await sequelize.sync({ alter: true }); // This will add any missing fields or modify existing ones
-        console.log('Models synchronized...');
-    } catch (err) {
-        console.error('Error connecting to the database:', err);
-        process.exit(1); // Exit process with failure if there is a problem
-    }
-};
+// Import your connectDB function from db.js if not already
+const { connectDB } = require('./config/db');
 
+// Set up associations
 Project.associate({ Activity });
 Activity.associate({ Project });
 
-
-sequelize.sync({ alter: true }).then(() => {
-    console.log('Database synchronized');
-}).catch((error) => {
-    console.error('Error syncing the database:', error);
-});
-
-
-
+// Connect to the database
 connectDB();
 
 const app = express();
@@ -45,16 +26,18 @@ app.use(express.json());
 
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
 }));
 
 // Serve static files from the 'uploads' folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+app.use('/api', activityRoutes);
+app.use('/api', projectRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api/user', userRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/projects', activityRoutes);
 app.use('/api/projects/:projectId/activities', activityRoutes);

@@ -21,6 +21,11 @@
     margin: 0;
 }
 
+.card-header .card-title {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
 .back-button {
     position: absolute;
     right: 15px;
@@ -74,4 +79,13 @@
 
 .project-actions .btn {
     margin-left: 10px;
+}
+
+.back-button {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 5px;
 }

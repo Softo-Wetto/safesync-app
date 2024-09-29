@@ -76,6 +76,32 @@ const ActivityPage = () => {
                                         <p>
                                             <strong>Activity Type: </strong> {activity.activityType} 
                                         </p>
+
+                                        {/* Display dueDate, createdAt, and updatedAt */}
+                                        {activity.dueDate && (
+                                            <p>
+                                                <strong>Due Date:</strong> {new Date(activity.dueDate).toLocaleDateString()}
+                                            </p>
+                                        )}
+                                        <p>
+                                            <strong>Created On:</strong> {new Date(activity.createdAt).toLocaleString()}
+                                        </p>
+                                        <p>
+                                            <strong>Last Updated:</strong> {new Date(activity.updatedAt).toLocaleString()}
+                                        </p>
+
+                                        {/* Display Assigned Users */}
+                                        <h6>Assigned Users:</h6>
+                                        {activity.Users && activity.Users.length > 0 ? (
+                                            <ul>
+                                                {activity.Users.map((user) => (
+                                                    <li key={user.id}>{user.fullName}</li>
+                                                ))}
+                                            </ul>
+                                        ) : (
+                                            <p>No users assigned to this activity.</p>
+                                        )}
+
                                         <div className="d-flex justify-content-between mt-3">
                                             <Link to={`/projects/${projectID}/activities/${activity.id}/update`} className="btn btn-outline-secondary">
                                                 Update

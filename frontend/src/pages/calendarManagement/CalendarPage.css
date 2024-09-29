@@ -1,0 +1,129 @@
+/* General Styling */
+.container-fluid.calendar-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.text-muted {
+    font-size: 1.1rem;
+}
+
+.calendar-section {
+    margin-bottom: 20px;
+}
+
+.activities-section {
+    margin-bottom: 20px;
+}
+
+/* Calendar Styling */
+.react-calendar {
+    width: 100%;
+    max-width: 100%;
+    background-color: #fff;
+    border: 1px solid #dfe4ea;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    background-color: #007bff;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.react-calendar__navigation button {
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.react-calendar__month-view__weekdays {
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    background-color: #f1f1f1;
+    padding: 10px 0;
+}
+
+.react-calendar__tile {
+    text-align: center;
+    padding: 15px 10px;
+    border: 1px solid #dfe4ea;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.react-calendar__tile:hover {
+    background-color: #e3f2fd;
+    border-color: #007bff;
+}
+
+.react-calendar__tile--now {
+    background-color: #007bff;
+    color: white;
+}
+
+.react-calendar__tile--active {
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+}
+
+.react-calendar__tile--hasActive {
+    background-color: #f0f8ff;
+}
+
+.react-calendar__month-view__days__day--weekend {
+    color: #d9534f;
+}
+
+/* Activity List Styling */
+.list-group-item {
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.list-group-item h5 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.list-group-item p {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+}
+
+.badge {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.dot {
+    height: 8px;
+    width: 8px;
+    background-color: #007bff;
+    border-radius: 50%;
+    display: inline-block;
+}

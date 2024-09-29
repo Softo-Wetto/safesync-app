@@ -10,7 +10,6 @@ const UpdateProject = () => {
     const [location, setLocation] = useState('');
     const [postcode, setPostcode] = useState('');
     const [city, setCity] = useState('');
-    const [file, setFile] = useState(null); // For file upload
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -30,29 +29,19 @@ const UpdateProject = () => {
         fetchProject();
     }, [projectID]);
 
-    const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('description', description);
-        formData.append('location', location);
-        formData.append('postcode', postcode);
-        formData.append('city', city);
-        if (file) {
-            formData.append('file', file);
-        }
+        const projectData = {
+            name,
+            description,
+            location,
+            postcode,
+            city,
+        };
 
         try {
-            await axios.put(`http://localhost:5000/api/projects/${projectID}/update`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            await axios.put(`http://localhost:5000/api/projects/${projectID}/update`, projectData);
             navigate(`/projects/${projectID}`);
         } catch (err) {
             setError('Failed to update project. Please try again.');
@@ -64,7 +53,7 @@ const UpdateProject = () => {
             <Sidebar />
             <div className="container-fluid">
                 <h1>Update Project</h1>
-                <form onSubmit={handleSubmit} encType="multipart/form-data">
+                <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label className="form-label">Project Name</label>
                         <input
@@ -113,14 +102,6 @@ const UpdateProject = () => {
                             onChange={(e) => setDescription(e.target.value)}
                             rows="5"
                         ></textarea>
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Upload File</label>
-                        <input 
-                            type="file" 
-                            className="form-control" 
-                            onChange={handleFileChange} 
-                        />
                     </div>
                     {error && <p className="text-danger">{error}</p>}
                     <button type="submit" className="btn btn-primary">Save Changes</button>

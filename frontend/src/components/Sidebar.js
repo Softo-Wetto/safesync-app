@@ -26,7 +26,7 @@ const Sidebar = () => {
                     </Link>
                 </li>
                 <li className="sidebar-nav-item">
-                    <Link className="sidebar-nav-link" to="#">
+                    <Link className="sidebar-nav-link" to="/users">
                         <FaUsers className="sidebar-icon" />
                         {!isCollapsed && <span>Users</span>}
                     </Link>
@@ -44,7 +44,7 @@ const Sidebar = () => {
                     </Link>
                 </li>
                 <li className="sidebar-nav-item">
-                    <Link className="sidebar-nav-link" to="#">
+                    <Link className="sidebar-nav-link" to="/calendar">
                         <FaCalendarAlt className="sidebar-icon" />
                         {!isCollapsed && <span>Events</span>}
                     </Link>

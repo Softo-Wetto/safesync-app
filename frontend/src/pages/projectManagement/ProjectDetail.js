@@ -3,7 +3,6 @@ import axios from 'axios';
 import Sidebar from '../../components/Sidebar';
 import { Link, useParams } from 'react-router-dom';
 import './ProjectDetail.css';
-import './ActivityPage.css'; // Importing ActivityPage CSS for consistency
 
 const ProjectDetail = () => {
     const { projectID } = useParams();
@@ -57,29 +56,26 @@ const ProjectDetail = () => {
     return (
         <div className="d-flex">
             <Sidebar />
-            <div className="container-fluid">
+            <div className="container-fluid position-relative">
+                
+                {/* Back Button Positioned Outside */}
+                <Link to="/projects" className="btn btn-light back-button">
+                    <i className="bi bi-arrow-left"></i> Back
+                </Link>
+
                 <div className="card project-detail-card shadow-sm">
                     <div className="card-header">
                         <h1 className="card-title">{project.name}</h1>
-                        <Link to="/projects" className="btn btn-light back-button">
-                            <i className="bi bi-arrow-left"></i>
-                        </Link>
                     </div>
                     <div className="card-body">
-                        <p><strong>Type:</strong> {project.type || 'N/A'}</p>
                         <p><strong>Description:</strong> {project.description || 'No description provided.'}</p>
                         <p><strong>Location:</strong> {project.location}</p>
                         <p><strong>Postcode:</strong> {project.postcode}</p>
                         <p><strong>City:</strong> {project.city}</p>
-
-                        {project.filePath && (
-                            <p>
-                                <strong>File:</strong>{' '}
-                                <a href={`http://localhost:5000/${project.filePath}`} target="_blank" rel="noopener noreferrer">
-                                    Download File
-                                </a>
-                            </p>
-                        )}
+                        
+                        {/* Display Created and Updated Timestamps */}
+                        <p><strong>Created At:</strong> {new Date(project.createdAt).toLocaleString()}</p>
+                        <p><strong>Last Updated At:</strong> {new Date(project.updatedAt).toLocaleString()}</p>
 
                         <hr />
 
@@ -99,9 +95,31 @@ const ProjectDetail = () => {
                                                     </span>
                                                 </p>
                                                 <p><strong>Type:</strong> {activity.activityType}</p>
+                                                
+                                                {/* Display Due Date if Available */}
+                                                {activity.dueDate && (
+                                                    <p><strong>Due Date:</strong> {new Date(activity.dueDate).toLocaleDateString()}</p>
+                                                )}
+
+                                                {/* Display Created and Updated Timestamps for Each Activity */}
+                                                <p><strong>Created At:</strong> {new Date(activity.createdAt).toLocaleString()}</p>
+                                                <p><strong>Last Updated At:</strong> {new Date(activity.updatedAt).toLocaleString()}</p>
+
+                                                {/* Display Assigned Users */}
+                                                <h6>Assigned Users</h6>
+                                                {activity.Users && activity.Users.length > 0 ? (
+                                                    <ul>
+                                                        {activity.Users.map((user) => (
+                                                            <li key={user.id}>{user.fullName}</li>
+                                                        ))}
+                                                    </ul>
+                                                ) : (
+                                                    <p>No users assigned to this activity.</p>
+                                                )}
+
                                                 <div className="d-flex justify-content-between mt-3">
-                                                    <Link to={`/projects/${projectID}/activities/${activity.id}/update`} className="btn btn-outline-secondary">
-                                                        Update
+                                                    <Link to={`/projects/${projectID}/activities/${activity.id}/view`} className="btn btn-outline-primary">
+                                                        View
                                                     </Link>
                                                 </div>
                                             </div>
@@ -135,6 +153,7 @@ const ProjectDetail = () => {
     );
 };
 
+// Helper functions for displaying outcome labels and badges
 const getOutcomeLabel = (outcome) => {
     switch (outcome) {
         case 'NS':

@@ -66,7 +66,7 @@ const ProjectPage = () => {
                         {projects.map((project) => (
                             <div 
                                 key={project.id} 
-                                className="project-item card mb-3 shadow-sm"
+                                className="project-item card shadow-sm"
                                 style={{ cursor: 'pointer' }} // Pointer cursor to indicate clickable
                                 onClick={() => window.location.href = `/projects/${project.id}`} // Navigate to project details
                             >
@@ -75,10 +75,7 @@ const ProjectPage = () => {
                                     <h5 className="card-title text-center">{project.name}</h5>
 
                                     {/* Project Details Container with Darker Background and More Rounded Corners */}
-                                    <div className="project-details p-3 mb-3" style={{ backgroundColor: '#e2e3e5', borderRadius: '10px' }}>
-                                        <p className="card-text">
-                                            <strong>Type: </strong>{project.type}
-                                        </p>
+                                    <div className="project-details p-3 mb-3">
                                         <p className="card-text">
                                             <strong>Description: </strong>{project.description}
                                         </p>
@@ -104,20 +101,6 @@ const ProjectPage = () => {
                                                     ))}
                                                 </ul>
                                             </div>
-                                        )}
-
-                                        {/* File Download Link */}
-                                        {project.filePath && (
-                                            <p className="card-text">
-                                                <strong>File: </strong>
-                                                <a
-                                                    href={`http://localhost:5000/${project.filePath}`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                >
-                                                    Download File
-                                                </a>
-                                            </p>
                                         )}
                                     </div>
                                 </div>

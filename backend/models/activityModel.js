@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
+const User = require('./userModel');  // Import User model
+const Project = require('./projectModel');  // Import Project model
 
 const Activity = sequelize.define('Activity', {
     name: {
@@ -13,9 +15,13 @@ const Activity = sequelize.define('Activity', {
         type: DataTypes.ENUM('C', 'NC', 'PC', 'NS'),
         allowNull: false,
     },
-    activityType: {  // Add this new field for activity type
+    activityType: {
         type: DataTypes.ENUM('Inspection', 'Training Induction', 'Testing and Debugging', 'Other'),
         allowNull: false,
+    },
+    dueDate: {
+        type: DataTypes.DATEONLY,  // Store date only without time
+        allowNull: true,           // This is optional
     },
     projectId: {
         type: DataTypes.INTEGER,
@@ -24,9 +30,14 @@ const Activity = sequelize.define('Activity', {
     },
 }, { timestamps: true });
 
-// Association with Project model
-Activity.associate = (models) => {
-    Activity.belongsTo(models.Project, { foreignKey: 'projectId', as: 'project' });
+// Associations
+Activity.associate = () => {
+    // Many-to-many relationship between Activity and User through ActivityUsers join table
+    Activity.belongsToMany(User, { through: 'ActivityUsers', foreignKey: 'activityId', otherKey: 'userId' });
+    User.belongsToMany(Activity, { through: 'ActivityUsers', foreignKey: 'userId', otherKey: 'activityId' });
+
+    // One-to-many relationship between Activity and Project
+    Activity.belongsTo(Project, { foreignKey: 'projectId', as: 'project' });
 };
 
 module.exports = Activity;

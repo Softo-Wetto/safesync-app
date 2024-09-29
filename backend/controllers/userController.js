@@ -1,5 +1,31 @@
 const User = require('../models/userModel');
 
+// Get all users (public or token-protected based on your needs)
+exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await User.findAll({
+            attributes: ['fullName', 'username', 'email', 'dateOfBirth', 'address', 'phoneNumber'] 
+        });
+        res.status(200).json(users);
+    } catch (err) {
+        console.error('Error fetching all users:', err.message);
+        res.status(500).json({ error: 'Server error while fetching all users' });
+    }
+};
+
+// Fetch users for assigning to an activity (minimal details needed)
+exports.getUsersForAssignment = async (req, res) => {
+    try {
+        const users = await User.findAll({
+            attributes: ['id', 'fullName'] // Only fetch ID and fullName for assignment purposes
+        });
+        res.json(users);
+    } catch (err) {
+        console.error('Error fetching users for assignment:', err.message);
+        res.status(500).json({ error: 'Server error while fetching users for assignment' });
+    }
+};
+
 // Get user profile
 exports.getUserProfile = async (req, res) => {
     try {

@@ -22,9 +22,6 @@ const Project = sequelize.define('Project', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    filePath: {
-        type: DataTypes.STRING,
-    },
 }, { timestamps: true });
 
 // Association with Activity model
