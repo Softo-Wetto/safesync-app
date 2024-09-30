@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 import axios from 'axios';
 import Sidebar from '../../components/Sidebar'; // Import your Sidebar component
 import './CalendarPage.css'; // Custom CSS for better styling
@@ -82,6 +83,11 @@ const CalendarPage = () => {
                                         </p>
                                         <p><strong>Type:</strong> {activity.activityType}</p>
                                         <p><strong>Due Date:</strong> {new Date(activity.dueDate).toLocaleDateString()}</p>
+                                        
+                                        {/* Add the View button */}
+                                        <Link to={`/projects/${activity.projectId}/activities/${activity.id}/view`} className="btn btn-primary">
+                View Activity
+            </Link>
                                     </li>
                                 ))}
                             </ul>

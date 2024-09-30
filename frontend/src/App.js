@@ -24,6 +24,7 @@ import UpdateActivity from './pages/projectManagement/UpdateActivity';
 import UserPage from './pages/userManagement/UserPage';
 
 import CalendarPage from './pages/calendarManagement/CalendarPage';
+import ViewCalendarActivity from './pages/calendarManagement/ViewCalendarActivity';
 
 import './App.css';
 
@@ -56,6 +57,7 @@ function App() {
 
                     {/* Calendar Management Routes */}
                     <Route path="/calendar" element={<CalendarPage />} />
+                    <Route path="/activities/:activityID" element={<ViewCalendarActivity />} />
                 </Routes>
             </div>
             <Footer />

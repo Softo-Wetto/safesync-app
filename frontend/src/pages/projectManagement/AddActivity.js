@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from '../../components/Sidebar';
+import BuildingInspection from '../../components/fieldTemplates/BuildingInspection';
+import ConstructionInspection from '../../components/fieldTemplates/ConstructionInspection';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const AddActivity = () => {
@@ -9,17 +11,17 @@ const AddActivity = () => {
     const [description, setDescription] = useState('');
     const [outcome, setOutcome] = useState('C');
     const [activityType, setActivityType] = useState('Inspection');
-    const [dueDate, setDueDate] = useState(''); // New state for due date
-    const [users, setUsers] = useState([]); // Store all users
-    const [selectedUsers, setSelectedUsers] = useState([]); // Store selected users
+    const [dueDate, setDueDate] = useState('');
+    const [users, setUsers] = useState([]);
+    const [selectedUsers, setSelectedUsers] = useState([]);
     const [error, setError] = useState('');
+    const [formData, setFormData] = useState({}); // This will store induction-specific fields
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Fetch users for assignment
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/users/for-assignment'); // Adjust if needed
+                const response = await axios.get('http://localhost:5000/api/users/for-assignment');
                 setUsers(response.data);
             } catch (err) {
                 console.error('Error fetching users:', err);
@@ -30,13 +32,18 @@ const AddActivity = () => {
 
     const handleUserChange = (e) => {
         const selected = Array.from(e.target.selectedOptions, (option) => option.value);
-
-        // Check if 'None' is selected
         if (selected.includes('none')) {
-            setSelectedUsers([]); // Clear the selected users
+            setSelectedUsers([]);
         } else {
             setSelectedUsers(selected);
         }
+    };
+
+    const handleInputChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
     };
 
     const handleSubmit = async (e) => {
@@ -47,8 +54,9 @@ const AddActivity = () => {
                 description,
                 outcome,
                 activityType,
-                assignedUsers: selectedUsers, // Send selected users
-                dueDate: dueDate || null,  // Send due date or null if not set
+                assignedUsers: selectedUsers,
+                dueDate: dueDate || null,
+                ...formData, // Include any additional form fields from InductionFields
             });
             if (response.status === 201) {
                 navigate(`/projects/${projectID}/activities`);
@@ -105,14 +113,24 @@ const AddActivity = () => {
                             onChange={(e) => setActivityType(e.target.value)}
                             required
                         >
-                            <option value="Inspection">Inspection</option>
+                            <option value="Other">Other</option>
+                            <option value="Building Inspection">Inspection (Building Inspection)</option>
+                            <option value="Construction Inspection">Inspection (Weekly Construction Inspection)</option>
                             <option value="Training Induction">Training Induction</option>
                             <option value="Testing and Debugging">Testing and Debugging</option>
-                            <option value="Other">Other</option>
                         </select>
                     </div>
 
-                    {/* Due Date Input */}
+                    {/* Conditionally Render Induction Fields */}
+                    {activityType === 'Building Inspection' && (
+                        <BuildingInspection formData={formData} handleInputChange={handleInputChange} />
+                    )}
+                    {activityType === 'Construction Inspection' && (
+                        <ConstructionInspection formData={formData} handleInputChange={handleInputChange} />
+                    )}
+
+                    <hr></hr>
+
                     <div className="mb-3">
                         <label className="form-label">Due Date (Optional)</label>
                         <input
@@ -131,7 +149,7 @@ const AddActivity = () => {
                             value={selectedUsers}
                             onChange={handleUserChange}
                         >
-                            <option value="none">None</option> {/* Add None Option */}
+                            <option value="none">None</option>
                             {users.map((user) => (
                                 <option key={user.id} value={user.id}>
                                     {user.fullName}

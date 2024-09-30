@@ -158,10 +158,20 @@ exports.getActivityUsers = async (req, res) => {
 
 // Get all activities (simplified for Calendar)
 exports.getAllActivities = async (req, res) => {
-    console.log("Fetching all activities");
     try {
         const activities = await Activity.findAll({
-            attributes: ['id', 'name', 'outcome', 'activityType', 'dueDate'], // Fetch only necessary fields
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'fullName'],
+                    through: { attributes: [] }
+                }
+            ],
+            attributes: [
+                'id', 'name', 'description', 'outcome', 
+                'activityType', 'dueDate', 'createdAt', 
+                'updatedAt', 'projectId' 
+            ],
         });
         res.json(activities);
     } catch (err) {

@@ -16,7 +16,7 @@ const Activity = sequelize.define('Activity', {
         allowNull: false,
     },
     activityType: {
-        type: DataTypes.ENUM('Inspection', 'Training Induction', 'Testing and Debugging', 'Other'),
+        type: DataTypes.ENUM('Other', 'Building Inspection', 'Construction Inspection', 'Training Induction', 'Testing and Debugging'),
         allowNull: false,
     },
     dueDate: {

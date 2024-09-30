@@ -14,6 +14,9 @@ const {
 // General route to get all activities
 router.get('/activities', getAllActivities);
 
+// View activity from calendar
+router.get('/activities/:activityID', getActivityById);
+
 // Specific route to get all activities for a project
 router.get('/projects/:projectID/activities', getActivities);
 
