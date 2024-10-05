@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from '../../components/Sidebar';
-import BuildingInspection from '../../components/fieldTemplates/BuildingInspection';
 import ConstructionInspection from '../../components/fieldTemplates/ConstructionInspection';
+import BuildingInspection from '../../components/fieldTemplates/BuildingInspection';
+import TrainingInduction from '../../components/fieldTemplates/TrainingInduction';
+import TestingAndDebugging from '../../components/fieldTemplates/TestingAndDebugging';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const AddActivity = () => {
@@ -10,12 +12,12 @@ const AddActivity = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [outcome, setOutcome] = useState('C');
-    const [activityType, setActivityType] = useState('Inspection');
+    const [activityType, setActivityType] = useState(''); // Track the selected activity type
     const [dueDate, setDueDate] = useState('');
     const [users, setUsers] = useState([]);
     const [selectedUsers, setSelectedUsers] = useState([]);
+    const [formData, setFormData] = useState({}); // Store dynamic form data
     const [error, setError] = useState('');
-    const [formData, setFormData] = useState({}); // This will store induction-specific fields
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,11 +34,7 @@ const AddActivity = () => {
 
     const handleUserChange = (e) => {
         const selected = Array.from(e.target.selectedOptions, (option) => option.value);
-        if (selected.includes('none')) {
-            setSelectedUsers([]);
-        } else {
-            setSelectedUsers(selected);
-        }
+        setSelectedUsers(selected.includes('none') ? [] : selected);
     };
 
     const handleInputChange = (e) => {
@@ -56,7 +54,7 @@ const AddActivity = () => {
                 activityType,
                 assignedUsers: selectedUsers,
                 dueDate: dueDate || null,
-                ...formData, // Include any additional form fields from InductionFields
+                ...formData, // Include additional form fields from dynamic forms
             });
             if (response.status === 201) {
                 navigate(`/projects/${projectID}/activities`);
@@ -113,23 +111,28 @@ const AddActivity = () => {
                             onChange={(e) => setActivityType(e.target.value)}
                             required
                         >
-                            <option value="Other">Other</option>
-                            <option value="Building Inspection">Inspection (Building Inspection)</option>
-                            <option value="Construction Inspection">Inspection (Weekly Construction Inspection)</option>
+                            <option value="">Select Activity Type</option>
+                            <option value="Building Inspection">Building Inspection</option>
+                            <option value="Construction Inspection">Construction Inspection</option>
                             <option value="Training Induction">Training Induction</option>
                             <option value="Testing and Debugging">Testing and Debugging</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
 
-                    {/* Conditionally Render Induction Fields */}
+                    {/* Conditionally Render Form Fields Based on Activity Type */}
                     {activityType === 'Building Inspection' && (
                         <BuildingInspection formData={formData} handleInputChange={handleInputChange} />
                     )}
                     {activityType === 'Construction Inspection' && (
                         <ConstructionInspection formData={formData} handleInputChange={handleInputChange} />
                     )}
-
-                    <hr></hr>
+                    {activityType === 'Training Induction' && (
+                        <TrainingInduction formData={formData} handleInputChange={handleInputChange} />
+                    )}
+                    {activityType === 'Testing and Debugging' && (
+                        <TestingAndDebugging formData={formData} handleInputChange={handleInputChange} />
+                    )}
 
                     <div className="mb-3">
                         <label className="form-label">Due Date (Optional)</label>

@@ -3,6 +3,8 @@ import axios from 'axios';
 import Sidebar from '../../components/Sidebar';
 import BuildingInspection from '../../components/fieldTemplates/BuildingInspection';
 import ConstructionInspection from '../../components/fieldTemplates/ConstructionInspection';
+import TrainingInduction from '../../components/fieldTemplates/TrainingInduction';
+import TestingAndDebugging from '../../components/fieldTemplates/TestingAndDebugging';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const UpdateActivity = () => {
@@ -44,7 +46,7 @@ const UpdateActivity = () => {
         };
     
         fetchData();
-    }, [projectID, activityId]);    
+    }, [projectID, activityId]);
 
     const handleInputChange = (e) => {
         setFormData({
@@ -130,8 +132,8 @@ const UpdateActivity = () => {
                             required
                         >
                             <option value="Other">Other</option>
-                            <option value="Building Inspection">Inspection (Building Inspection)</option>
-                            <option value="Construction Inspection">Inspection (Weekly Construction Inspection)</option>
+                            <option value="Building Inspection">Building Inspection</option>
+                            <option value="Construction Inspection">Construction Inspection</option>
                             <option value="Training Induction">Training Induction</option>
                             <option value="Testing and Debugging">Testing and Debugging</option>
                         </select>
@@ -143,6 +145,12 @@ const UpdateActivity = () => {
                     )}
                     {formData.activityType === 'Construction Inspection' && (
                         <ConstructionInspection formData={formData} handleInputChange={handleInputChange} />
+                    )}
+                    {formData.activityType === 'Training Induction' && (
+                        <TrainingInduction formData={formData} handleInputChange={handleInputChange} />
+                    )}
+                    {formData.activityType === 'Testing and Debugging' && (
+                        <TestingAndDebugging formData={formData} handleInputChange={handleInputChange} />
                     )}
 
                     <div className="mb-3">

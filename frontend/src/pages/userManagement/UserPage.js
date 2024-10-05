@@ -6,6 +6,7 @@ import './UserPage.css'; // Import the CSS file
 const UsersPage = () => {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState('');
+    const [expandedUsers, setExpandedUsers] = useState({});
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -18,6 +19,13 @@ const UsersPage = () => {
         };
         fetchUsers();
     }, []);
+
+    const toggleDetails = (userId) => {
+        setExpandedUsers((prevState) => ({
+            ...prevState,
+            [userId]: !prevState[userId],
+        }));
+    };
 
     return (
         <div className="d-flex">
@@ -33,9 +41,8 @@ const UsersPage = () => {
                                 <th>Full Name</th>
                                 <th>Username</th>
                                 <th>Email</th>
-                                <th>Date of Birth</th>
-                                <th>Address</th>
                                 <th>Phone Number</th>
+                                <th>Details</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,9 +51,21 @@ const UsersPage = () => {
                                     <td data-label="Full Name">{user.fullName}</td>
                                     <td data-label="Username">{user.username}</td>
                                     <td data-label="Email">{user.email}</td>
-                                    <td data-label="Date of Birth">{user.dateOfBirth}</td>
-                                    <td data-label="Address">{user.address}</td>
                                     <td data-label="Phone Number">{user.phoneNumber}</td>
+                                    <td data-label="Details">
+                                        <button 
+                                            className="btn btn-primary" 
+                                            onClick={() => toggleDetails(user.id)}
+                                        >
+                                            {expandedUsers[user.id] ? 'Hide Details' : 'Show Details'}
+                                        </button>
+                                        {expandedUsers[user.id] && (
+                                            <div className="mt-2">
+                                                <p><strong>Date of Birth:</strong> {user.dateOfBirth}</p>
+                                                <p><strong>Address:</strong> {user.address}</p>
+                                            </div>
+                                        )}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
