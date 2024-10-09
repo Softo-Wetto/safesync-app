@@ -6,6 +6,7 @@ import { faUser, faEnvelope, faCalendar, faMapMarkerAlt, faPhone, faEdit, faTras
 import './Profile.css'; 
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth'; 
+import authAxios from '../utils/axios';
 
 const Profile = () => {
     const { logout } = useAuth();
@@ -20,9 +21,9 @@ const Profile = () => {
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/users/profile', {
+                const response = await authAxios.get('/users/profile', {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                        Authorization: `Bearer ${localStorage.getItem('token')}` // You don't need this line anymore if you're using the authAxios instance with the interceptor.
                     }
                 });
                 const data = response.data || {}; 
@@ -37,12 +38,15 @@ const Profile = () => {
                 });
                 setLoading(false);
             } catch (err) {
-                console.error('Error fetching user profile:', err);
-                setError('Failed to load profile. Please try again later.');
+                if (err.response && err.response.status === 401) {
+                    setError('Your session has expired. Please login again.');
+                } else {
+                    console.error('Error fetching user profile:', err);
+                    setError('Failed to load profile. Please try again later.');
+                }
                 setLoading(false);
             }
         };
-
         fetchUserProfile();
     }, []);
 

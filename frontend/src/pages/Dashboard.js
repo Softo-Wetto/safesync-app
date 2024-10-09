@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaUsers, FaDollarSign, FaProjectDiagram, FaCalendarAlt, FaChartLine, FaUserPlus, FaShoppingCart, FaMoneyBillWave } from 'react-icons/fa'; // Importing icons
+import { FaUsers, FaProjectDiagram, FaCalendarAlt, FaClipboardCheck, FaUserPlus, FaShoppingCart, FaMoneyBillWave, FaTasks } from 'react-icons/fa'; // Importing icons
 import './Dashboard.css';
 import Sidebar from '../components/Sidebar';
 
@@ -14,77 +14,83 @@ const Dashboard = () => {
                     <h1 className="mb-4">Overview</h1>
                     <p className="text-muted mb-5">Welcome to your dashboard! Here you can manage your account and view your data.</p>
                     <div className="row g-4">
+                        
+                        {/* Users Card */}
                         <div className="col-md-4">
                             <div className="card text-bg-primary mb-3 shadow-lg rounded">
                                 <div className="card-header d-flex align-items-center">
                                     <FaUsers className="me-2" /> Users
                                 </div>
                                 <div className="card-body">
-                                    <h5 className="card-title">3</h5>
-                                    <p className="card-text">Total number of users registered on the platform.</p>
+                                    <h5 className="card-title">See All Users</h5>
+                                    <p className="card-text">View and check details of users that are registered on this platform.</p>
                                 </div>
                                 <div className="card-footer">
-                                    <Link to="/users" className="btn btn-light">View Details</Link>
+                                    <Link to="/users" className="btn btn-light">View User Details</Link>
                                 </div>
                             </div>
                         </div>
 
+                        {/* Task Board Card */}
                         <div className="col-md-4">
                             <div className="card text-bg-success mb-3 shadow-lg rounded">
                                 <div className="card-header d-flex align-items-center">
-                                    <FaDollarSign className="me-2" /> Revenue
+                                    <FaTasks className="me-2" /> Task Board
                                 </div>
                                 <div className="card-body">
-                                    <h5 className="card-title">$45,234</h5>
-                                    <p className="card-text">Total revenue generated this month. Check down below.</p>
+                                    <h5 className="card-title">Manage Your Tasks</h5>
+                                    <p className="card-text">View and manage all your activities in a Kanban-style task board.</p>
                                 </div>
                                 <div className="card-footer">
-                                    <button className="btn btn-light">View Details</button>
+                                    <Link to="/kanban-board" className="btn btn-light">View Task Board</Link>
                                 </div>
                             </div>
                         </div>
 
+                        {/* Active Projects Card */}
                         <div className="col-md-4">
                             <div className="card text-bg-warning mb-3 shadow-lg rounded">
                                 <div className="card-header d-flex align-items-center">
                                     <FaProjectDiagram className="me-2" /> Active Projects
                                 </div>
                                 <div className="card-body">
-                                    <h5 className="card-title">12</h5>
-                                    <p className="card-text">Number of projects currently active. See more below.</p>
+                                    <h5 className="card-title">Manage Your Projects</h5>
+                                    <p className="card-text">View and manage number of projects currently active. See more below.</p>
                                 </div>
                                 <div className="card-footer">
-                                    <Link to="/projects" className="btn btn-light">View Details</Link>
+                                    <Link to="/projects" className="btn btn-light">View Project Details</Link>
                                 </div>
                             </div>
                         </div>
 
+                        {/* Events Card */}
                         <div className="col-md-4">
                             <div className="card text-bg-info mb-3 shadow-lg rounded">
                                 <div className="card-header d-flex align-items-center">
                                     <FaCalendarAlt className="me-2" /> Events
                                 </div>
                                 <div className="card-body">
-                                    <h5 className="card-title">5</h5>
-                                    <p className="card-text">Events scheduled for the upcoming month.</p>
+                                    <h5 className="card-title">See Activities Due</h5>
+                                    <p className="card-text">View and check activities that are scheduled for the upcoming month.</p>
                                 </div>
                                 <div className="card-footer">
-                                <Link to="/calendar" className="btn btn-light">View Details</Link>
+                                    <Link to="/calendar" className="btn btn-light">View Event Details</Link>
                                 </div>
                             </div>
                         </div>
 
+                        {/* Performance Metrics Card */}
                         <div className="col-md-4">
                             <div className="card text-bg-danger mb-3 shadow-lg rounded">
                                 <div className="card-header d-flex align-items-center">
-                                    <FaChartLine className="me-2" /> Performance Metrics
+                                    <FaClipboardCheck className="me-2" /> Task Progress
                                 </div>
                                 <div className="card-body">
-                                    <h5 className="card-title">87%</h5>
-                                    <p className="card-text">Performance metrics for this quarter.</p>
+                                    <h5 className="card-title">View Task Progress</h5>
+                                    <p className="card-text">View and manage how much progress you have made during development</p>
                                 </div>
                                 <div className="card-footer">
-                                    <button className="btn btn-light">View Metrics</button>
+                                <Link to="/tasks" className="btn btn-light">View Progress Details</Link>
                                 </div>
                             </div>
                         </div>

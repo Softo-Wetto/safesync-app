@@ -25,4 +25,3 @@ export const useAuth = () => {
 
     return { username, login, logout };
 };
-

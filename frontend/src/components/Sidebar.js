@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaUsers, FaDollarSign, FaProjectDiagram, FaCalendarAlt, FaChartLine, FaBars } from 'react-icons/fa';
+import { FaHome, FaUsers, FaTasks, FaProjectDiagram, FaCalendarAlt, FaClipboardCheck, FaBars } from 'react-icons/fa';
 import './Sidebar.css'; // Import the CSS file for styling
 
 const Sidebar = () => {
@@ -32,9 +32,9 @@ const Sidebar = () => {
                     </Link>
                 </li>
                 <li className="sidebar-nav-item">
-                    <Link className="sidebar-nav-link" to="#">
-                        <FaDollarSign className="sidebar-icon" />
-                        {!isCollapsed && <span>Revenue</span>}
+                    <Link className="sidebar-nav-link" to="/kanban-board">
+                        <FaTasks className="sidebar-icon" />
+                        {!isCollapsed && <span>Task Board</span>}
                     </Link>
                 </li>
                 <li className="sidebar-nav-item">
@@ -50,9 +50,9 @@ const Sidebar = () => {
                     </Link>
                 </li>
                 <li className="sidebar-nav-item">
-                    <Link className="sidebar-nav-link" to="#">
-                        <FaChartLine className="sidebar-icon" />
-                        {!isCollapsed && <span>Metrics</span>}
+                    <Link className="sidebar-nav-link" to="/tasks">
+                        <FaClipboardCheck className="sidebar-icon" />
+                        {!isCollapsed && <span>Progress</span>}
                     </Link>
                 </li>
             </ul>

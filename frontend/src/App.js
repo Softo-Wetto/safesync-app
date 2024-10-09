@@ -11,6 +11,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
+import PrivateRoute from './components/PrivateRoute';
 
 import ViewActivity from './pages/projectManagement/ViewActivity';  
 import ProjectPage from './pages/projectManagement/ProjectPage';
@@ -26,6 +27,9 @@ import UserPage from './pages/userManagement/UserPage';
 import CalendarPage from './pages/calendarManagement/CalendarPage';
 import ViewCalendarActivity from './pages/calendarManagement/ViewCalendarActivity';
 
+import TaskBoard from './pages/taskManagement/TaskBoard';
+import TaskProgress from './pages/taskManagement/TaskProgress';
+
 import './App.css';
 
 function App() {
@@ -37,7 +41,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/profile" element={<Profile />} />
@@ -58,6 +62,10 @@ function App() {
                     {/* Calendar Management Routes */}
                     <Route path="/calendar" element={<CalendarPage />} />
                     <Route path="/activities/:activityID" element={<ViewCalendarActivity />} />
+
+                    {/* Task Management Routes */}
+                    <Route path="/kanban-board" element={<TaskBoard />} />
+                    <Route path="/tasks" element={<TaskProgress />} />
                 </Routes>
             </div>
             <Footer />
