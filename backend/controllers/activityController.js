@@ -1,4 +1,5 @@
 const Activity = require('../models/activityModel');
+const ActivityDetails = require('../models/activityDetailsModel');
 const User = require('../models/userModel');
 
 // Get activities for a project
@@ -75,11 +76,18 @@ exports.addActivity = async (req, res) => {
 exports.removeActivity = async (req, res) => {
     try {
         const activity = await Activity.findByPk(req.params.activityId);
-        if (!activity) return res.status(404).json({ error: 'Activity not found' });
+
+        if (!activity) {
+            return res.status(404).json({ error: 'Activity not found' });
+        }
+        // Find and delete associated ActivityDetails
+        await ActivityDetails.destroy({ where: { activityId: activity.id } });
+        // Now delete the activity itself
         await activity.destroy();
-        res.json({ message: 'Activity removed' });
+        res.json({ message: 'Activity and its details removed' });
     } catch (err) {
-        res.status(500).json({ error: 'Server error' });
+        console.error(err);
+        res.status(500).json({ error: 'Server error during activity deletion' });
     }
 };
 

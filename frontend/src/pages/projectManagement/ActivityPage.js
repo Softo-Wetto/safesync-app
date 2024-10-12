@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar';
-import './ActivityPage.css'; // Custom CSS for better styling
+import './ActivityPage.css'; 
 
 const ActivityPage = () => {
     const { projectID } = useParams();
@@ -24,6 +24,7 @@ const ActivityPage = () => {
         fetchActivities();
     }, [projectID]);
 
+    // Handle deleting a single activity
     const handleDeleteActivity = async (activityId) => {
         try {
             await axios.delete(`http://localhost:5000/api/projects/${projectID}/activities/${activityId}/remove`);
@@ -33,15 +34,38 @@ const ActivityPage = () => {
         }
     };
 
+    // Handle deleting all activities
+    const handleDeleteAllActivities = async () => {
+        const confirmDeleteAll = window.confirm("Are you sure you want to delete all activities for this project?");
+        if (!confirmDeleteAll) return;
+
+        try {
+            await Promise.all(activities.map(activity => 
+                axios.delete(`http://localhost:5000/api/projects/${projectID}/activities/${activity.id}/remove`)
+            ));
+            setActivities([]); // Clear activities array after deletion
+        } catch (err) {
+            setError('Failed to delete all activities.');
+        }
+    };
+
     return (
         <div className="d-flex">
             <Sidebar />
             <div className="container-fluid">
-                <div className="activity-header mb-4">
+                <div className="activity-header mb-4 d-flex justify-content-between align-items-center">
                     <h1 className="display-4">Project Activities</h1>
-                    <Link to={`/projects/${projectID}/activities/add`} className="btn btn-primary btn-lg">
-                        Add Activity
-                    </Link>
+                    <div>
+                        <Link to={`/projects/${projectID}/activities/add`} className="btn btn-primary btn-lg me-2">
+                            Add Activity
+                        </Link>
+                        {/* Render "Delete All Activities" button if there are more than one activity */}
+                        {activities.length > 1 && (
+                            <button className="btn btn-danger btn-lg" onClick={handleDeleteAllActivities}>
+                                Delete All Activities
+                            </button>
+                        )}
+                    </div>
                 </div>
 
                 {/* Back to Project Detail button */}
@@ -73,22 +97,14 @@ const ActivityPage = () => {
                                                 {getOutcomeLabel(activity.outcome)}
                                             </span>
                                         </p>
-                                        <p>
-                                            <strong>Activity Type: </strong> {activity.activityType} 
-                                        </p>
+                                        <p><strong>Activity Type: </strong> {activity.activityType}</p>
 
                                         {/* Display dueDate, createdAt, and updatedAt */}
                                         {activity.dueDate && (
-                                            <p>
-                                                <strong>Due Date:</strong> {new Date(activity.dueDate).toLocaleDateString()}
-                                            </p>
+                                            <p><strong>Due Date:</strong> {new Date(activity.dueDate).toLocaleDateString()}</p>
                                         )}
-                                        <p>
-                                            <strong>Created On:</strong> {new Date(activity.createdAt).toLocaleString()}
-                                        </p>
-                                        <p>
-                                            <strong>Last Updated:</strong> {new Date(activity.updatedAt).toLocaleString()}
-                                        </p>
+                                        <p><strong>Created On:</strong> {new Date(activity.createdAt).toLocaleString()}</p>
+                                        <p><strong>Last Updated:</strong> {new Date(activity.updatedAt).toLocaleString()}</p>
 
                                         {/* Display Assigned Users */}
                                         <h6>Assigned Users:</h6>
@@ -140,13 +156,13 @@ const getOutcomeLabel = (outcome) => {
 const getBadgeClass = (outcome) => {
     switch (outcome) {
         case 'C':
-            return 'success'; // Green badge for compliance
+            return 'success'; // Green badge for completed
         case 'NS':
-            return 'danger'; // Red badge for non-compliance
+            return 'danger'; // Red badge for not started
         case 'PC':
-            return 'secondary'; // Gray badge for not applicable
+            return 'secondary'; // Gray badge for partially completed
         case 'NC':
-            return 'warning'; // Yellow badge for unable to verify
+            return 'warning'; // Yellow badge for not completed
         default:
             return 'dark'; // Dark badge for unknown outcome
     }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from '../../components/Sidebar';
+import ConfirmationModal from '../../components/ConfirmationModal';
 import { Link, useParams } from 'react-router-dom';
 import './ProjectDetail.css';
 
@@ -10,6 +11,8 @@ const ProjectDetail = () => {
     const [activities, setActivities] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
 
     useEffect(() => {
         const fetchProject = async () => {
@@ -36,13 +39,26 @@ const ProjectDetail = () => {
         fetchActivities();
     }, [projectID]);
 
-    const handleDeleteProject = async (projectID) => {
-        try {
-            await axios.delete(`http://localhost:5000/api/projects/${projectID}/remove`);
-            window.location.href = '/projects';
-        } catch (err) {
-            console.error('Failed to delete project.');
+    const handleDeleteProject = () => {
+        // Show the modal with an appropriate message
+        if (activities.length > 0) {
+            setModalMessage("This project has activities. Please delete all activities before deleting the project.");
+        } else {
+            setModalMessage("Are you sure you want to delete this project?");
         }
+        setShowModal(true); // Show the modal
+    };
+
+    const confirmDeleteProject = async () => {
+        if (activities.length === 0) {
+            try {
+                await axios.delete(`http://localhost:5000/api/projects/${projectID}/remove`);
+                window.location.href = '/projects'; // Redirect after deletion
+            } catch (err) {
+                console.error('Failed to delete project.');
+            }
+        }
+        setShowModal(false); // Close the modal after confirmation
     };
 
     if (loading) {
@@ -64,9 +80,18 @@ const ProjectDetail = () => {
                 </Link>
 
                 <div className="card project-detail-card shadow-sm">
-                    <div className="card-header">
+                    <div className="card-header d-flex justify-content-between align-items-center">
                         <h1 className="card-title">{project.name}</h1>
+                        <div>
+                            <Link to={`/projects/${projectID}/update`} className="btn btn-secondary btn-lg me-2">
+                                Update Project
+                            </Link>
+                            <button className="btn btn-danger btn-lg" onClick={handleDeleteProject}>
+                                Delete Project
+                            </button>
+                        </div>
                     </div>
+
                     <div className="card-body">
                         <p><strong>Description:</strong> {project.description || 'No description provided.'}</p>
                         <p><strong>Location:</strong> {project.location}</p>
@@ -79,7 +104,13 @@ const ProjectDetail = () => {
 
                         <hr />
 
-                        <h3>Project Activities</h3>
+                        <div className="d-flex justify-content-between align-items-center">
+                            <h3>Project Activities</h3>
+                            <Link to={`/projects/${projectID}/activities`} className="btn btn-primary btn-lg">
+                                Manage Activities
+                            </Link>
+                        </div>
+                        <br />
                         {activities.length > 0 ? (
                             <div className="row">
                                 {activities.map((activity) => (
@@ -130,25 +161,17 @@ const ProjectDetail = () => {
                         ) : (
                             <p>No activities found for this project.</p>
                         )}
-
-                        <br />
-                        <Link to={`/projects/${projectID}/activities`} className="btn btn-primary me-2">
-                            Manage Activities
-                        </Link>
-
-                        <hr />
-
-                        <div className="project-actions">
-                            <Link to={`/projects/${projectID}/update`} className="btn btn-secondary me-2">
-                                Update Project
-                            </Link>
-                            <button className="btn btn-danger" onClick={() => handleDeleteProject(projectID)}>
-                                Delete Project
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
+
+            {/* Confirmation Modal */}
+            <ConfirmationModal
+                show={showModal}
+                message={modalMessage}
+                onClose={() => setShowModal(false)} // Close modal
+                onConfirm={confirmDeleteProject} // Confirm delete
+            />
         </div>
     );
 };

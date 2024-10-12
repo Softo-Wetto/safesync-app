@@ -1,0 +1,18 @@
+.accordion-header {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    margin-bottom: 5px;
+}
+
+.accordion-header:hover {
+    background-color: #e2e6ea;
+}
+
+.accordion-content {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    margin-bottom: 10px;
+}

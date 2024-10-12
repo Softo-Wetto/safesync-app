@@ -47,6 +47,7 @@ const AddActivity = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            // First, create the activity
             const response = await axios.post(`http://localhost:5000/api/projects/${projectID}/activities/add`, {
                 name,
                 description,
@@ -54,9 +55,18 @@ const AddActivity = () => {
                 activityType,
                 assignedUsers: selectedUsers,
                 dueDate: dueDate || null,
-                ...formData, // Include additional form fields from dynamic forms
             });
+
             if (response.status === 201) {
+                const activityId = response.data.id;
+
+                // Then, send the extended form data (if applicable) to the new endpoint
+                if (activityType !== 'Other') {
+                    await axios.post(`http://localhost:5000/api/activities/${activityId}/details`, {
+                        formData,
+                    });
+                }
+
                 navigate(`/projects/${projectID}/activities`);
             }
         } catch (err) {
@@ -122,16 +132,16 @@ const AddActivity = () => {
 
                     {/* Conditionally Render Form Fields Based on Activity Type */}
                     {activityType === 'Building Inspection' && (
-                        <BuildingInspection formData={formData} handleInputChange={handleInputChange} />
+                        <BuildingInspection formData={formData} handleInputChange={handleInputChange} isEditable={true} />
                     )}
                     {activityType === 'Construction Inspection' && (
-                        <ConstructionInspection formData={formData} handleInputChange={handleInputChange} />
+                        <ConstructionInspection formData={formData} handleInputChange={handleInputChange} isEditable={true} />
                     )}
                     {activityType === 'Training Induction' && (
-                        <TrainingInduction formData={formData} handleInputChange={handleInputChange} />
+                        <TrainingInduction formData={formData} handleInputChange={handleInputChange} isEditable={true} />
                     )}
                     {activityType === 'Testing and Debugging' && (
-                        <TestingAndDebugging formData={formData} handleInputChange={handleInputChange} />
+                        <TestingAndDebugging formData={formData} handleInputChange={handleInputChange} isEditable={true} />
                     )}
 
                     <div className="mb-3">

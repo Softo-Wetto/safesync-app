@@ -15,8 +15,11 @@ const UpdateActivity = () => {
         outcome: 'C',
         activityType: 'Inspection',
         dueDate: '',
-        assignedUsers: []
+        assignedUsers: [],
+        extendedData: {},
+        images: [],
     });
+    const [newImages, setNewImages] = useState([]);
     const [users, setUsers] = useState([]);
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -24,19 +27,23 @@ const UpdateActivity = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [activityResponse, usersResponse] = await Promise.all([
+                const [activityResponse, usersResponse, detailsResponse] = await Promise.all([
                     axios.get(`http://localhost:5000/api/projects/${projectID}/activities/${activityId}`),
-                    axios.get('http://localhost:5000/api/users/for-assignment')
+                    axios.get('http://localhost:5000/api/users/for-assignment'),
+                    axios.get(`http://localhost:5000/api/activities/${activityId}/details`),  
                 ]);
     
                 const activity = activityResponse.data;
                 const users = usersResponse.data;
+                const details = detailsResponse.data;
     
                 // Set form data once both are available
                 if (activity) {
                     setFormData({
                         ...activity,
                         assignedUsers: activity.Users.map(user => user.id),
+                        extendedData: details ? details.formData : {},
+                        images: details ? details.images : [],
                     });
                 }
                 setUsers(users);
@@ -57,23 +64,72 @@ const UpdateActivity = () => {
 
     const handleUserChange = (e) => {
         const selected = Array.from(e.target.selectedOptions, (option) => option.value);
-        if (selected.includes('none')) {
+        setFormData({
+            ...formData,
+            assignedUsers: selected.includes('none') ? [] : selected,
+        });
+    };
+
+    const handleDynamicInputChange = (e) => {
+        setFormData({
+            ...formData,
+            extendedData: {
+                ...formData.extendedData,
+                [e.target.name]: e.target.value,
+            }
+        });
+    };
+
+    // Handle new image selection
+    const handleImageChange = (e) => {
+        const files = Array.from(e.target.files);
+        setNewImages(files);
+    };
+
+    // Remove image from the server and UI
+    const handleImageRemove = async (imageName) => {
+        try {
+            await axios.delete(`http://localhost:5000/api/activities/${activityId}/details/${imageName}/delete`);
             setFormData({
                 ...formData,
-                assignedUsers: [],
+                images: formData.images.filter(img => img !== imageName),
             });
-        } else {
-            setFormData({
-                ...formData,
-                assignedUsers: selected,
-            });
+        } catch (err) {
+            setError('Failed to remove image.');
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:5000/api/projects/${projectID}/activities/${activityId}/update`, formData);
+            // Update base activity
+            await axios.put(`http://localhost:5000/api/projects/${projectID}/activities/${activityId}/update`, {
+                name: formData.name,
+                description: formData.description,
+                outcome: formData.outcome,
+                activityType: formData.activityType,
+                dueDate: formData.dueDate,
+                assignedUsers: formData.assignedUsers,
+            });
+
+            // Upload new images
+            if (newImages.length > 0) {
+                const formDataImages = new FormData();
+                newImages.forEach((image) => {
+                    formDataImages.append('images', image);  // Append images
+                });
+                await axios.post(`http://localhost:5000/api/activities/${activityId}/details`, formDataImages, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+            }
+
+            // Update extended form data
+            await axios.post(`http://localhost:5000/api/activities/${activityId}/details`, {
+                formData: formData.extendedData,
+            });
+
             navigate(`/projects/${projectID}/activities`);
         } catch (err) {
             setError('Failed to update activity.');
@@ -141,16 +197,41 @@ const UpdateActivity = () => {
 
                     {/* Conditionally Render Field Templates */}
                     {formData.activityType === 'Building Inspection' && (
-                        <BuildingInspection formData={formData} handleInputChange={handleInputChange} />
+                        <BuildingInspection 
+                        formData={formData.extendedData} 
+                        handleInputChange={handleDynamicInputChange} 
+                        handleImageChange={handleImageChange}
+                        handleImageRemove={handleImageRemove}
+                        newImages={newImages}
+                        isEditable={true}
+                        />
                     )}
                     {formData.activityType === 'Construction Inspection' && (
-                        <ConstructionInspection formData={formData} handleInputChange={handleInputChange} />
+                        <ConstructionInspection 
+                        formData={formData.extendedData} 
+                        handleInputChange={handleDynamicInputChange} 
+                        handleImageChange={handleImageChange}
+                        handleImageRemove={handleImageRemove}
+                        isEditable={true}
+                        />
                     )}
                     {formData.activityType === 'Training Induction' && (
-                        <TrainingInduction formData={formData} handleInputChange={handleInputChange} />
+                        <TrainingInduction 
+                        formData={formData.extendedData} 
+                        handleInputChange={handleDynamicInputChange} 
+                        handleImageChange={handleImageChange}
+                        handleImageRemove={handleImageRemove}
+                        isEditable={true}
+                        />
                     )}
                     {formData.activityType === 'Testing and Debugging' && (
-                        <TestingAndDebugging formData={formData} handleInputChange={handleInputChange} />
+                        <TestingAndDebugging 
+                        formData={formData.extendedData} 
+                        handleInputChange={handleDynamicInputChange} 
+                        handleImageChange={handleImageChange}
+                        handleImageRemove={handleImageRemove}
+                        isEditable={true}
+                        />
                     )}
 
                     <div className="mb-3">
@@ -180,6 +261,7 @@ const UpdateActivity = () => {
                             ))}
                         </select>
                     </div>
+
                     {error && <p className="text-danger">{error}</p>}
                     <button type="submit" className="btn btn-primary">Save Changes</button>
                 </form>

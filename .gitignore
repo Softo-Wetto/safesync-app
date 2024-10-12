@@ -30,6 +30,12 @@
 /frontend/.env.test.local
 /frontend/.env.production.local
 
+# Ignore everything in the uploads folder
+/backend/uploads/*
+
+# Except the .gitkeep file
+!/backend/uploads/.gitkeep
+
 # Miscellaneous
 .DS_Store
 npm-debug.log*

@@ -1,3 +1,66 @@
+/* ViewActivity.css */
+
+/* Enhanced Styling for Activity Details */
+.activity-card {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.activity-details-section {
+    margin-bottom: 20px;
+}
+
+.activity-details-section h5 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.details-grid .details-item {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.details-item strong {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.outcome-comment {
+    margin-left: 15px;
+    font-size: 14px;
+}
+
+.image-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.image-previews img {
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    transition: transform 0.2s ease;
+}
+
+.image-previews img:hover {
+    transform: scale(1.1);
+}
+
+/* Back button styling */
 .back-button {
     display: inline-flex;
     align-items: center;
