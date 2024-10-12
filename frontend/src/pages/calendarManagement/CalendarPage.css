@@ -93,6 +93,27 @@ h1 {
     color: #d9534f;
 }
 
+/* Full tile coloring based on activity outcomes */
+.calendar-tile-ns {
+    background-color: #ff4d4d !important; /* Red for Not Started */
+    color: white !important;
+}
+
+.calendar-tile-nc {
+    background-color: #f4c542 !important; /* Yellow for Not Completed */
+    color: white !important;
+}
+
+.calendar-tile-pc {
+    background-color: #6c757d !important; /* Gray for Partially Completed */
+    color: white !important;
+}
+
+.calendar-tile-c {
+    background-color: #4caf50 !important; /* Green for Completed */
+    color: white !important;
+}
+
 /* Activity List Styling */
 .list-group-item {
     border-radius: 8px;

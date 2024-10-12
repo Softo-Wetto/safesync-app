@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link } from 'react-router-dom'; 
 import axios from 'axios';
-import Sidebar from '../../components/Sidebar'; // Import your Sidebar component
-import './CalendarPage.css'; // Custom CSS for better styling
+import Sidebar from '../../components/Sidebar';
+import './CalendarPage.css'; 
 
 const CalendarPage = () => {
     const [activities, setActivities] = useState([]);
-    const [selectedDate, setSelectedDate] = useState(new Date()); // State to hold selected date
-    const [activitiesOnDate, setActivitiesOnDate] = useState([]); // Activities on the selected date
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [activitiesOnDate, setActivitiesOnDate] = useState([]);
 
     useEffect(() => {
         const fetchActivities = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/activities'); // This fetches all activities
+                const response = await axios.get('http://localhost:5000/api/activities');
                 setActivities(response.data);
             } catch (err) {
                 console.error('Error fetching activities:', err);
@@ -33,10 +33,44 @@ const CalendarPage = () => {
         );
     };
 
+    // Determine the highest priority outcome for a date
+    const getHighestPriorityOutcome = (activitiesOnDate) => {
+        const priority = ['NS', 'NC', 'PC', 'Unknown', 'C']; // Define priority order
+        let highestPriority = 'C'; // Default to 'Completed'
+
+        activitiesOnDate.forEach(activity => {
+            const activityPriority = priority.indexOf(activity.outcome);
+            const highestPriorityIndex = priority.indexOf(highestPriority);
+
+            if (activityPriority < highestPriorityIndex) {
+                highestPriority = activity.outcome;
+            }
+        });
+
+        return highestPriority;
+    };
+
+    const getClassForOutcome = (outcome) => {
+        switch (outcome) {
+            case 'NS':
+                return 'calendar-tile-ns'; // Red for Not Started
+            case 'NC':
+                return 'calendar-tile-nc'; // Yellow for Not Completed
+            case 'PC':
+                return 'calendar-tile-pc'; // Gray for Partially Completed
+            case 'Unknown':
+                return 'calendar-tile-unknown'; // Dark for Unknown
+            case 'C':
+                return 'calendar-tile-c'; // Green for Completed
+            default:
+                return '';
+        }
+    };
+
     // When the user clicks on a date, filter activities based on the selected date
     useEffect(() => {
         const activitiesForSelectedDate = activities.filter(
-            (activity) => isSameDay(activity.dueDate, selectedDate) // Use the date comparison function
+            (activity) => isSameDay(activity.dueDate, selectedDate)
         );
         setActivitiesOnDate(activitiesForSelectedDate);
     }, [selectedDate, activities]);
@@ -47,7 +81,7 @@ const CalendarPage = () => {
 
     return (
         <div className="d-flex">
-            <Sidebar /> {/* Add your sidebar for consistency */}
+            <Sidebar />
             <div className="container-fluid calendar-container">
                 <h1 className="mb-4">Activity Calendar</h1>
                 <p className="text-muted mb-5">View activities by due date on the calendar.</p>
@@ -57,13 +91,16 @@ const CalendarPage = () => {
                         <Calendar
                             value={selectedDate}
                             onChange={handleDateChange}
-                            tileContent={({ date, view }) => {
-                                const activityOnThisDate = activities.some(
-                                    (activity) => isSameDay(activity.dueDate, date)
-                                );
-                                return activityOnThisDate ? (
-                                    <div className="dot" title="Activity Due"></div>
-                                ) : null;
+                            tileClassName={({ date, view }) => {
+                                // Filter activities for the current date
+                                const activitiesOnThisDate = activities.filter(activity => isSameDay(activity.dueDate, date));
+                                
+                                if (activitiesOnThisDate.length > 0) {
+                                    const highestPriorityOutcome = getHighestPriorityOutcome(activitiesOnThisDate);
+                                    return getClassForOutcome(highestPriorityOutcome); // Apply class based on the highest priority outcome
+                                }
+
+                                return null;
                             }}
                         />
                     </div>
@@ -86,8 +123,8 @@ const CalendarPage = () => {
                                         
                                         {/* Add the View button */}
                                         <Link to={`/projects/${activity.projectId}/activities/${activity.id}/view`} className="btn btn-primary">
-                View Activity
-            </Link>
+                                            View Activity
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
