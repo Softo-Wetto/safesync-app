@@ -54,17 +54,47 @@ const ConstructionInspection = ({ formData, handleInputChange, newImages, handle
 
             <div className="mb-3">
                 <label className="form-label">Project Name:</label>
-                <p>{formData.projectName || 'N/A'}</p>
+                {isEditable ? (
+                    <input
+                        type="text"
+                        name="constructionProjectName"
+                        className="form-control"
+                        value={formData.constructionProjectName || ''}
+                        onChange={handleInputChange}
+                    />
+                ) : (
+                <p>{formData.constructionProjectName || 'N/A'}</p>
+            )}
             </div>
 
             <div className="mb-3">
                 <label className="form-label">Inspection Conducted By:</label>
+                {isEditable ? (
+                    <input
+                        type="text"
+                        name="constructionInspector"
+                        className="form-control"
+                        value={formData.constructionInspector || ''}
+                        onChange={handleInputChange}
+                    />
+                ) : (
                 <p>{formData.constructionInspector || 'N/A'}</p>
+            )}
             </div>
 
             <div className="mb-3">
                 <label className="form-label">Date:</label>
+                {isEditable ? (
+                    <input
+                        type="date"
+                        name="constructionInspectionDate"
+                        className="form-control"
+                        value={formData.constructionInspectionDate || ''}
+                        onChange={handleInputChange}
+                    />
+                ) : (
                 <p>{formData.constructionInspectionDate || 'N/A'}</p>
+            )}
             </div>
 
             <h5>Outcome Legend</h5>
